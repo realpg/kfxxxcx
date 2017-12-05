@@ -1,39 +1,51 @@
 //app.js
+const util = require('./utils/util.js')
+
+var vm = null
+
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    //获取vm
+    vm = this
+    //获取用户缓存数据
+    var userInfo = wx.getStorageSync("userInfo");
+    console.log("local storage userInfo:" + JSON.stringify(userInfo));
+    //如果没有缓存
+    if (!util.judgeIsAnyNullStr(userInfo)) {
+      vm.globalData.userInfo = wx.getStorageSync("userInfo");
+      console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
+    }
+  },
+  //监听小程序打开
+  onShow: function () {
+    //获取用户地理位置
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
+  },
+  //获取系统信息
+  getSystemInfo: function (cb) {
+    if (vm.globalData.systemInfo) {
+      typeof cb == "function" && cb(vm.globalData.systemInfo)
+    } else {
+      wx.getSystemInfo({
+        success: function (ret) {
+          vm.globalData.systemInfo = ret
+          console.log("app wx.getSystemInfo:" + JSON.stringify(ret))
+          typeof cb == "function" && cb(vm.globalData.systemInfo)
         }
-      }
+      })
+    }
+  },
+  //向globalData中存储数据
+  storeUserInfo: function (obj) {
+    console.log("storeUserInfo :" + JSON.stringify(obj))
+    wx.setStorage({
+      key: "userInfo",
+      data: obj
     })
+    vm.globalData.userInfo = obj
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    systemInfo: null
   }
 })
