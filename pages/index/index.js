@@ -51,7 +51,7 @@ Page({
             util.login(param, function (ret, err) {
               var msgObj = ret.data;
               if (msgObj.result) {  //登录成功，本地缓存信息
-                vm.storeUserInfo(msgObj.ret);
+                app.storeUserInfo(msgObj.ret);
               } else {
                 //新用户引导注册
                 var param = {
