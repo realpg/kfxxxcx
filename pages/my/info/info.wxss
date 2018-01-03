@@ -1,0 +1,17 @@
+/* pages/my/info/info.wxss */
+.page{
+  font-size: 30rpx;
+}
+.avatar-area{
+  height: 200rpx
+}
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+}
+.weui-cell{
+  height: 50rpx
+}
+.btn_area {
+  
+}

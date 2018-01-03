@@ -1,0 +1,7 @@
+/* pages/index/cjsj/cjsj.wxss */
+.page{
+  margin-top: 31rpx;
+  background-color: white;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+}

@@ -1,0 +1,7 @@
+<!--pages/index/cjsj/getAngle/getangle.wxml-->
+<canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" canvas-id="firstCanvas" bindtouchend="touchEnd" bindtap="tap">
+<image wx:if='{{left[0]!=null&&top[0]!=null}}' id='0'class='movable' src='{{btn_path}}'style='left:{{left[0]}}px;top:{{top[0]}}px;' catchtouchmove='viewTouchMove'></image>
+<image wx:if='{{left[1]!=null&&top[1]!=null}}' id='1'class='movable' src='{{btn_path}}'style='left:{{left[1]}}px;top:{{top[1]}}px;' catchtouchmove='viewTouchMove'></image>
+<image wx:if='{{left[2]!=null&&top[2]!=null}}' id='2'class='movable' src='{{btn_path}}'style='left:{{left[2]}}px;top:{{top[2]}}px;' catchtouchmove='viewTouchMove'></image>
+
+</canvas>

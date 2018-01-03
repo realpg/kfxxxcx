@@ -1,0 +1,62 @@
+<!--pages/my/medicalRecord/medicalRecord.wxml-->
+<view wx:if="{{data==null}}">您还没有病历,请联系医生或管理员处理</view>
+<view wx:else class='page'>
+  <view class="weui-cells">
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd"><p>姓</p><p>名</p></view>:
+      <view class="weui-cell__bd">{{user.real_name}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd"><p>性</p><p>别</p></view>:
+      <view class="weui-cell__bd">{{user.gender}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd"><p>出</p><p>生</p><p>日</p><p>期</p></view>:
+      <view class="weui-cell__bd">{{user.birthday}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd"><p>籍</p><p>贯</p></view>:
+      <view class="weui-cell__bd">{{user.province}}省{{user.city}}市</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd"><p>联</p><p>系</p><p>电</p><p>话</p></view>:
+      <view class="weui-cell__bd">{{user.phonenum}}</view>
+    </view>
+  </view>
+  <view class="weui-cells">
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd" wx:if="{{data.ss_time}}"><p>手</p><p>术</p><p>日</p><p>期</p></view>:
+      <view class="weui-cell__bd">{{data.ss_time}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd" wx:if="{{data.wt_time}}"><p>首</p><p>次</p><p>弯</p><p>腿</p></view>:
+      <view class="weui-cell__bd">{{data.wt_time}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd" wx:if="{{data.zz_doctor.name}}"><p>主</p><p>治</p><p>医</p><p>生</p></view>:
+      <view class="weui-cell__bd">{{data.zz_doctor.name}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd" wx:if="{{data.kf_doctor.name}}"><p>康</p><p>复</p><p>医</p><p>师</p></view>:
+      <view class="weui-cell__bd">{{data.kf_doctor.name}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__hd" wx:if="{{kfjh.length>0}}">
+        <p>康</p><p>复</p><p>计</p><p>划</p></view>:
+      <navigator class="weui-cell__bd" url="../kfjh/kfjh" style='color:blue'>点击查看</navigator>
+    </view>
+
+  </view>
+  <!-- //康复计划
+计划数据 -->
+  </view>

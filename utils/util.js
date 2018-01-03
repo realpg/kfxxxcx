@@ -1,9 +1,8 @@
 //测试标识
-var TESTMODE = false;
-
+var TESTMODE =false;
 //服务器地址
 var SERVER_URL = "http://kfxx.isart.me";
-var DEBUG_URL = "http://localhost/kfxxSrv/public";
+var DEBUG_URL = "http://localhost/kfypt/public";
 var SERVER_URL = (TESTMODE) ? DEBUG_URL : SERVER_URL;
 
 
@@ -12,6 +11,7 @@ var SERVER_URL = (TESTMODE) ? DEBUG_URL : SERVER_URL;
 
 //进行接口调用的基本方法
 function wxRequest(url, param, method, successCallback, errorCallback) {
+  showLoading();
   console.log("wxRequest url:" + JSON.stringify(url) + " param:" + JSON.stringify(param));
   if (!judgeIsAnyNullStr(getApp().globalData.userInfo)) {
     //user_id未设置
@@ -24,22 +24,27 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
   wx.request({
     url: url,
     data: param,
-    header: {
-      "Content-Type": "application/json"
-    },
+    header: {"content-Type": "application/json"},
+    // header: { 'content-type': 'application/x-www-form-urlencoded' },
     method: method,
     success: function (ret) {
       console.log("ret:" + JSON.stringify(ret))
       successCallback(ret)
-      hideLoading()
     },
     fail: function (err) {
       console.log("wxRequest fail:" + JSON.stringify(err))
+      
+    },
+    complete:function(){
       hideLoading()
     }
   });
 }
 
+//获取七牛token
+function getQiniuToken(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/user/getQiniuToken', param, "POST", successCallback, errorCallback);
+}
 
 //获取用户的OpenId
 function getOpenId(param, successCallback, errorCallback) {
@@ -72,6 +77,64 @@ const formatTime = date => {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+//根据id获取用户信息
+function getUserInfo(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/user/getById', param, "GET", successCallback, errorCallback);
+}
+//根据id更新用户资料
+function updateUserById(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/user/updateById', param, "POST", successCallback, errorCallback);
+}
+
+//获取首页轮播图
+function getADs(param, successCallback, errorCallback){
+  wxRequest(SERVER_URL + '/api/ad/getADs', param, "GET", successCallback, errorCallback);
+}
+//获取文章列表
+function getArticleList(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/xj/getByCon', param, "GET", successCallback, errorCallback);
+}
+//获取文章类型列表
+function getArticleTypeList( successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/xj/getXJTypes', "", "GET", successCallback, errorCallback);
+}
+//获取文章
+function getArticle(param,successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/xj/getXJInfoById',param, "GET", successCallback, errorCallback);
+}
+//获取量表列表
+function getLbList( successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/lb/getList', "", "GET", successCallback, errorCallback);
+}
+//通过id获取量表问题
+function getQuesitionsById(param, successCallback, errorCallback){
+  wxRequest(SERVER_URL + '/api/lb/getQuestionsById', param, "GET", successCallback, errorCallback);
+}
+
+//通过id上传问题答案
+function answerLB(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/lb/answerLB', param, "POST", successCallback, errorCallback);
+}
+//
+function getAnswerHistoryById(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/lb/getAnswerHistory', param, "GET", successCallback, errorCallback);
+}
+
+
+//通过id获取病历
+function getBLByUserId(param,successCallback,errorCallback){
+  wxRequest(SERVER_URL + '/api/kfjh/getBLByUserId', param, "GET", successCallback, errorCallback);
+}
+
+//通过id获取康复计划
+function getKFJHByUserId(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/kfjh/getKFJHByUserId', param, "GET", successCallback, errorCallback);
+}
+//通过id获取计划数据
+function getKFSJByUserId(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/kfjh/getKFSJByUserId', param, "GET", successCallback, errorCallback);
+}
+
 
 const formatNumber = n => {
   n = n.toString()
@@ -175,10 +238,24 @@ function conStr(str, r_str) {
 
 
 module.exports = {
+  getQiniuToken: getQiniuToken,
   getOpenId: getOpenId,
   login: login,
   register: register,
   sendVertifyCode: sendVertifyCode,
+  getUserInfo: getUserInfo,
+  updateUserById: updateUserById,
+  getADs:getADs,
+  getArticleList: getArticleList,
+  getArticleTypeList:getArticleTypeList,
+  getArticle: getArticle,
+  getLbList: getLbList,
+  getQuesitionsById: getQuesitionsById,
+  answerLB: answerLB,
+  getAnswerHistoryById: getAnswerHistoryById,
+  getBLByUserId: getBLByUserId,
+  getKFJHByUserId:getKFJHByUserId,
+  getKFSJByUserId: getKFSJByUserId,
 
   formatTime: formatTime,
   showLoading: showLoading,

@@ -1,0 +1,37 @@
+<!--pages/my/kfjh/kfjh.wxml-->
+<view wx:if='{{!kfjhExist}}'>
+  您还没有康复计划哦，请联系您的主治医生或康复师获取
+</view>
+
+<view wx:else class='body page'>
+
+
+  <view class='section' id="cd-timeline" class="cd-container">
+  <block wx:for="{{time_axis}}" wx:key="key">
+    <view class="cd-timeline-block">      
+        <view wx:if="{{item.passed}}"class="cd-timeline-img cd1-picture">
+          <!-- <image src="images/cd-icon-picture.svg" alt="Picture" /> -->
+        </view>
+        <view wx:else class="cd-timeline-img cd-picture">
+          <!-- <image src="images/cd-icon-picture.svg" alt="Picture" /> -->
+        </view>
+        <!-- cd-timeline-img -->
+
+        <view class="cd-timeline-content">
+          <view class='h2'>{{item.time}}</view>
+          <view class='p'>
+            <!-- <view wx:for='{{item.title}}' wx:key="key1" wx:for-item='t'>{{t}}</view> -->
+            {{item.title}}
+          </view>
+          <!-- <view class='a' href="#" class="cd-read-more">阅读更多</view> -->
+        </view>
+        <!-- cd-timeline-content -->
+      
+    </view>
+    <!-- cd-timeline-block -->
+    </block>
+  </view>
+
+
+  <!-- cd-timeline -->
+</view>

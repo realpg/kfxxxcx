@@ -1,0 +1,29 @@
+/* pages/index/cjsj/chooseImg.wxss */
+
+.btn-1 {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.btn-1 button {
+  width: 90%;
+  outline: none;
+  border: none;
+  background: #18b4ed;
+  color: #fff;
+  height: 5rem;
+  display: inline-block;
+  border-radius: 0.4rem;
+  font-size: 2rem;
+}
+
+.enter .btn-2, .enter .btn-3 {
+  border: 0;
+  outline: none;
+  background: #18b4ed;
+  color: #fff;
+  height: 100%;
+  width: 8rem;
+  font-size: 2rem;
+}

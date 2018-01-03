@@ -1,0 +1,56 @@
+<view class="page " style='margin-top: 31rpx;background-color: white;'>
+  <view class="weui-cells__title">您需要测量的数据有:</view>
+  <view class="weui-cells weui-cells_after-title" wx:for="{{kfmb_jhsj}}" wx:key="key">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">{{item.name}}:</view>
+      <view class="weui-cell__ft">{{item.mode == "slider"?item.options[value[index]-1]:""}}</view>
+    </view>
+
+    <view wx:if='{{item.mode == "slider"}}'>
+      <slider id="{{index}}s" min="0" max="{{item.options.length-1}}" value="{{value[index]-1}}" bindchange="setSlider" style='border:1px solid black;'></slider>
+    </view>
+
+    <view wx:elif='{{item.mode == "input"}}'>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <input id='{{index}}i' type="digit" placeholder="带小数点的数字键盘" style="border:2px solid blue;" bindinput='bindinput' />
+        </view>
+      </view>
+    </view>
+
+    <view wx:elif='{{item.mode == "measure"}}'>
+      <view wx:if='{{value[index]==0}}'>
+        <button bindtap="GetAngle" size="mini" id='{{index}}m'>量角</button>
+      </view>
+      <view wx:else>
+        角度为{{value[index]}}
+        <button bindtap="GetAngle" size="mini" id='{{index}}m'>重新量角</button>
+      </view>
+    </view>
+
+  </view>
+  <!-- <view wx:for="{{kfmb_jhsj}}" wx:key="key">
+    <view>{{item.name}}:</view>
+
+    <view wx:if='{{item.mode == "slider"}}'>
+      <slider id="{{index}}s" min="0" max="{{item.options.length-1}}" value="{{value[index]-1}}" bindchange="setSlider" style='border:1px solid black;'></slider>
+      {{item.options[value[index]-1]}}
+    </view>
+
+    <view wx:elif='{{item.mode == "input"}}'>
+      <input id='{{index}}i' type="digit" placeholder="带小数点的数字键盘" style="width:100rpx;height:20px;border:2px solid blue;" bindinput='bindinput' />
+    </view>
+
+    <view wx:elif='{{item.mode == "measure"}}'>
+      <view wx:if='{{value[index]==0}}'>
+        <button bindtap="GetAngle" size="mini" id='{{index}}m'>量角</button>
+      </view>
+      <view wx:else>
+        角度为{{value[index]}}
+        <button bindtap="GetAngle" size="mini" id='{{index}}m'>重新量角</button>
+      </view>
+    </view>
+
+  </view> -->
+  <button class='subBtn' bindtap='submit' type="primary">提交数据</button>
+</view>

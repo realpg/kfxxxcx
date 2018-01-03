@@ -1,0 +1,12 @@
+/* pages/my/medicalRecord/medicalRecord.wxss */
+.weui-cell__hd{
+  font-size: 30rpx;
+  width: 130rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.weui-cell__bd{
+  font-size: 30rpx;
+  margin-left: 50rpx;
+}

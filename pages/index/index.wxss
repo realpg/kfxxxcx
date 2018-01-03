@@ -1,21 +1,74 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.session {
+  color: black;
+  border: 2px solid black;
+  margin: 20rpx 20rpx 40rpx 20rpx;
+  padding: 40rpx 40rpx;
+  border-radius: 5px;
+  background-color: white
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.sessionIcon {
+  width: 60rpx;
+  height: 60rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.sessionTitle {
+  color: red;
+  font-size: 50rpx;
+  margin-top: -70rpx;
+  margin-left: 70rpx;
+  margin-bottom: 60rpx;
+  border-bottom: 1px solid #ccc;
 }
 
-.usermotto {
-  margin-top: 200px;
+.task {
+  border-bottom: 2px solid #ccc;
+  margin: 50rpx 0rpx;
+}
+
+.taskName {
+  color: black;
+  font-size:48rpx;
+  margin-top: -60rpx;
+  margin-left: 60rpx;
+}
+
+.taskNumber {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.jumpBtn {
+  color: black;
+  left: 400rpx;
+  margin: 10rpx;
+}
+
+.kp_image {
+  width: 210rpx;
+  height: 210rpx;
+}
+.kp_title {
+  color: black;
+  
+  margin-top: -180rpx;
+  margin-left: 240rpx;
+  font-size:46rpx; 
+}
+.kp_tag{
+  color: black;
+  text-align: center;
+  width: 210rpx;
+  font-size: 30rpx;
+  margin-top: 15rpx;
+  margin-left: 240rpx;
+  margin-bottom: 80rpx;
+  border: 2px solid blue;
+  border-radius: 2px;
+}
+.weui-panel__hd{
+  font-size: 15px;
+}
+.btn{
+  color: black;
 }

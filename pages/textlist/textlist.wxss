@@ -1,0 +1,52 @@
+/* pages/text/text.wxss */
+.c-state1{  
+  transform: rotate(0deg) scale(1) translate(35%,0%);   
+  -webkit-transform: rotate(0deg) scale(1) translate(35%,0%);   
+}  
+.text{
+  border-bottom: 2px solid #ccc;
+  margin: 50rpx 30rpx;
+  background-color: white;
+}
+.textImg{
+  width: 210rpx;
+  height: 210rpx; 
+}
+.textTitle{
+  color: black;
+  
+  margin-top: -180rpx;
+  margin-left: 240rpx;
+  font-size:46rpx; 
+}
+.textTag{
+  color: black;
+  text-align: center;
+  width: 210rpx;
+  font-size: 30rpx;
+  margin-top: 15rpx;
+  margin-left: 240rpx;
+  margin-bottom: 80rpx;
+  border: 2px solid blue;
+  border-radius: 2px;
+}
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result:before{
+    display: none;
+}
+.type{
+    padding: 36rpx 0 36rpx 0;
+}
+.typelist{
+  position:absolute;
+  top: 78rpx;
+}
+.weui-panel{
+  margin-top: 24rpx;
+}
+.page__bd{
+  margin-top: 24rpx;
+}

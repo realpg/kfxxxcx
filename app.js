@@ -1,11 +1,10 @@
 //app.js
-const util = require('./utils/util.js')
-
-var vm = null
+import wxValidate from 'utils/wxValidate'
+var vm;
+const util = require('/utils/util.js')
 
 App({
   onLaunch: function () {
-    //获取vm
     vm = this
     //获取用户缓存数据
     var userInfo = wx.getStorageSync("userInfo");
@@ -16,25 +15,7 @@ App({
       console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
     }
   },
-  //监听小程序打开
-  onShow: function () {
-    //获取用户地理位置
-
-  },
-  //获取系统信息
-  getSystemInfo: function (cb) {
-    if (vm.globalData.systemInfo) {
-      typeof cb == "function" && cb(vm.globalData.systemInfo)
-    } else {
-      wx.getSystemInfo({
-        success: function (ret) {
-          vm.globalData.systemInfo = ret
-          console.log("app wx.getSystemInfo:" + JSON.stringify(ret))
-          typeof cb == "function" && cb(vm.globalData.systemInfo)
-        }
-      })
-    }
-  },
+  wxValidate: function (rules, messages) { new wxValidate(rules, messages) },
   //向globalData中存储数据
   storeUserInfo: function (obj) {
     console.log("storeUserInfo :" + JSON.stringify(obj))
@@ -46,6 +27,14 @@ App({
   },
   globalData: {
     userInfo: null,
-    systemInfo: null
+    user: {
+      name: "",
+      nickname: "这是一串昵称",
+      real_name: "李狗蛋",
+      birthday: "1978 - 09 - 01",
+      avatar: "/images/avatar.jpg",
+      phonenum: "13012345678",
+    },
   }
+
 })

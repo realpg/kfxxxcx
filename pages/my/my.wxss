@@ -1,0 +1,154 @@
+/* pages/my/my.wxss */
+
+.u_info_area {
+  width: 750rpx;
+  height: 176rpx;
+  font-size: 20px;
+  background-color: white;
+  margin-top: 31rpx;
+  margin-bottom: 42rpx;
+}
+.weui-cell{
+  height: 44rpx;
+}
+.avatar {
+  width: 130rpx;
+  height: 130rpx;
+  position: absolute;
+  margin: 23rpx 28rpx 23rpx 24rpx;
+  
+}
+
+.nickname {
+  position: absolute;
+  font-size: 34rpx;
+  margin-top: 42rpx;
+  margin-left: 182rpx;
+  color: black
+}
+.usertext{
+  position: absolute;
+  font-size: 26rpx;
+  margin-top: 102rpx;
+  margin-left: 182rpx;
+  color: black
+}
+
+
+#edit_t {
+  position: absolute;
+  font-size: 20px;
+  left: 440rpx;
+  top: 290rpx;
+}
+
+#edit_i {
+  position: absolute;
+  left: 400rpx;
+  top: 300rpx;
+}
+
+.functions {
+  width: 740rpx;
+  font-size: 20px;
+  margin: 20px 0;
+  background-color: white;
+}
+
+.functionBlock {
+  height: 30px;
+  border: 2px solid black;
+  margin: 2px 10rpx 0 10rpx;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.kfjh_icon {
+  height: 20;
+  position: relative;
+  top: 5px;
+}
+
+.block_name {
+  font-size: 20px;
+  position: relative;
+  left: 40rpx;
+  top: -25px;
+}
+
+.function_enter {
+  color: black;
+  font-size: 30px;
+  position: relative;
+  left: 640rpx;
+  top: -60px;
+}
+
+.numOfRemand {
+  position: absolute;
+  right: 120rpx;
+  top: 490rpx;
+}
+
+body {
+  font-family: SimHei, 'Helvetica Neue', Arial, 'Droid Sans', sans-serif;
+  font-size: 14px;
+}
+
+/*index部分*/
+
+.weui-tabbar {
+  position: fixed !important;
+}
+
+.weui-panel {
+  margin: 0 !important;
+  padding-bottom: 60px;
+}
+
+.weui-media-box__title span {
+  float: right;
+  font-size: 14px;
+  color: #666;
+}
+
+/*mine部分*/
+
+.user {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  background: #40e0d0;
+  position: relative;
+}
+
+.userImg {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 25px;
+  left: 15px;
+}
+
+.userImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+
+
+
+.ueseText h3 span {
+  padding-left: 30px;
+  font-size: 14px;
+}
+
+.weui-cell__bd{
+  margin-left: 8rpx;
+}
+.icon_my{
+  margin-right: 5px;vertical-align: middle;width:50rpx; height: 50rpx;
+}

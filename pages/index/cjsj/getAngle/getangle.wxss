@@ -1,0 +1,9 @@
+/* pages/index/cjsj/getAngle/getangle.wxss */
+.movable{
+    position: absolute;
+    height:40px;
+    width:40px;
+    color: white;
+    text-align: center;
+    line-height: 120px;
+}

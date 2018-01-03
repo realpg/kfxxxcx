@@ -1,13 +1,62 @@
 {
   "pages": [
+    "pages/index/cjsj/getAngle/getangle",
     "pages/index/index",
-    "pages/register/register",
-    "pages/logs/logs"
+    "pages/textlist/textlist",
+    "pages/scale/scale",
+    "pages/my/my",
+    "pages/index/cjsj/cjsj",
+    "pages/index/cjsj/chooseImg",
+    "pages/index/cjsj/angle/angle",
+    "pages/textlist/article/article",
+    "pages/my/history/history",
+    "pages/my/info/info",
+    "pages/my/edit/edit",
+    "pages/my/kfjh/kfjh",
+    "pages/my/message/message",
+    "pages/my/feedback/feedback",
+    "pages/scale/form/form",
+    "pages/my/medicalRecord/medicalRecord",
+    "pages/scale/history/history",
+    "pages/scale/history/detail/detail"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#38373d",
+    "navigationBarTitleText": "康复云平台",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icons/index.png",
+        "selectedIconPath": "icons/index-s.png",
+        "selectedColor": "#1aad19"
+      },
+      {
+        "pagePath": "pages/textlist/textlist",
+        "text": "资讯",
+        "iconPath": "icons/text.png",
+        "selectedIconPath": "icons/text-s.png",
+        "selectedColor": "#1aad19"
+      },
+      {
+        "pagePath": "pages/scale/scale",
+        "text": "量表",
+        "iconPath": "icons/liangbiao.png",
+        "selectedIconPath": "icons/liangbiao-s.png",
+        "selectedColor": "#1aad19"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "icons/my.png",
+        "selectedIconPath": "icons/my-s.png",
+        "selectedColor": "#1aad19"
+      }
+    ]
   }
 }

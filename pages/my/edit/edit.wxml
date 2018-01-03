@@ -1,0 +1,76 @@
+<!-- pages/my/edit/edit.wxml -->
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
+  <action-sheet-item bindtap="chooseImage">从相册获取</action-sheet-item>
+  <action-sheet-item bindtap="takePhoto">拍照</action-sheet-item>
+  <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
+
+<form bindsubmit='submit'>
+<!-- <view class="weui-cells__title"></view> -->
+<view class="weui-cells" style='margin-top: 31rpx;'>
+    <view class="weui-cell" style='height: 200rpx'>
+      <view class="weui-cell__bd"><p>头</p><p>像</p></view>
+      <view class="weui-cell__ft">
+      <image src='{{tempAvatarPath}}' class='avatar' bindtap='changeAvatar'></image>
+    </view>
+  </view>
+
+ <view class="weui-cell">
+      <view class="weui-cell__bd">昵称</view>
+      <view class="weui-cell__ft ">
+      <input class="weui-input enabled" name="nick_name" value='{{user.nick_name}}' auto-focus/>
+    </view>
+  </view>
+
+  <view class="weui-cell">
+      <view class="weui-cell__bd">姓名</view>
+      <view class="weui-cell__ft ">
+      <input class="weui-input" name="real_name" value='{{user.real_name}}' auto-focus disabled='true' />
+    </view>
+  </view>
+
+  <view class="weui-cell">
+      <view class="weui-cell__bd">性别</view>
+      <view class="weui-cell__ft ">
+      <picker value="{{user.gender}}" name="gender" range="{{['保密','男性','女性']}}"bindchange="bindGenderChange" disabled='true'>
+        <view class="weui-input">{{user.gender}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="weui-cell">
+      <view class="weui-cell__bd"><p>手</p><p>机</p><p>号</p></view>
+      <view class="weui-cell__ft ">
+      <input class="weui-input" name="phonenum" value='{{user.phonenum}}' auto-focus disabled='true' />
+    </view>
+  </view>
+
+  <view class="weui-cell">
+      <view class="weui-cell__bd">生日</view>
+      <view class="weui-cell__ft ">
+      <picker mode="date" value="{{user.birthday}}" name="birthday"start="1900-09-01" end="2050-09-01" bindchange="bindDateChange">
+        <view class="weui-input enabled">{{user.birthday}}</view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells">
+
+    <view class="weui-cell">
+      <view class="weui-cell__bd">省份</view>
+      <view class="weui-cell__ft ">{{user.province}}</view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__bd">城市</view>
+      <view class="weui-cell__ft ">{{user.city}}</view>
+    </view>
+
+  </view>
+
+<view class='btn_area'>
+<button form-type='submit'>提交</button>
+<button bindtap='cancle'>取消</button>
+</view>
+</form>

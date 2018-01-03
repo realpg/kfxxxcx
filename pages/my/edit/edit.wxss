@@ -1,0 +1,24 @@
+/* pages/my/edit/edit.wxss */
+
+.avatar-area{
+  height: 200rpx;
+  margin-top: 31rpx;
+}
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+}
+.weui-cell{
+  height: 50rpx;
+  
+}
+.weui-cell__bd{
+}
+
+.enabled{
+  color: black
+}
+.btn_area {
+  
+  width: 100%;
+}
