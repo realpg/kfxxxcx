@@ -1,35 +1,45 @@
-<view class="page " style='margin-top: 31rpx;background-color: white;'>
-  <view class="weui-cells__title">您需要测量的数据有:</view>
-  <view class="weui-cells weui-cells_after-title" wx:for="{{kfmb_jhsj}}" wx:key="key">
-    <view class="weui-cell">
-      <view class="weui-cell__hd">{{item.name}}:</view>
-      <view class="weui-cell__ft">{{item.mode == "slider"?item.options[value[index]-1]:""}}</view>
-    </view>
-
-    <view wx:if='{{item.mode == "slider"}}'>
-      <slider id="{{index}}s" min="0" max="{{item.options.length-1}}" value="{{value[index]-1}}" bindchange="setSlider" style='border:1px solid black;'></slider>
-    </view>
-
-    <view wx:elif='{{item.mode == "input"}}'>
+<view class="page " style='margin-top: 31rpx;background-color: white;'catchtouchmove=''>
+  <view class='session'>
+    <view class="weui-cells__title title">您需要测量的数据有:</view>
+    <view class="weui-cells weui-cells_after-title" wx:for="{{kfmb_jhsj}}" wx:key="key">
       <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <input id='{{index}}i' type="digit" placeholder="带小数点的数字键盘" style="border:2px solid blue;" bindinput='bindinput' />
+        <view class="weui-cell__bd">{{item.name}}:</view>
+        <view class="weui-cell__ft">{{item.mode == "slider"?item.options[value[index]-1]:value[index]==0?"":value[index] }}</view>
+      </view>
+
+      <view wx:if='{{item.mode == "slider"}}'>
+
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <slider class="border-radius-5 border" id="{{index}}s" min="0" max="{{item.options.length-1}}" value="{{value[index]-1}}" bindchange="setSlider"></slider>
+          </view>
         </view>
       </view>
-    </view>
 
-    <view wx:elif='{{item.mode == "measure"}}'>
-      <view wx:if='{{value[index]==0}}'>
-        <button bindtap="GetAngle" size="mini" id='{{index}}m'>量角</button>
+      <view wx:elif='{{item.mode == "input"}}'>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <input id='{{index}}i' class="border border-radius-5" type="digit" placeholder="请输入..." bindinput='bindinput' style="font-size:26rpx;margin-left:30rpx;margin-right:30rpx;padding-left:10rpx" />
+          </view>
+        </view>
       </view>
-      <view wx:else>
-        角度为{{value[index]}}
-        <button bindtap="GetAngle" size="mini" id='{{index}}m'>重新量角</button>
-      </view>
-    </view>
 
-  </view>
-  <!-- <view wx:for="{{kfmb_jhsj}}" wx:key="key">
+      <view wx:elif='{{item.mode == "measure"}}'>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view wx:if='{{value[index]==0}}'>
+              <button bindtap="GetAngle" size="mini" id='{{index}}m'style='margin-left:30rpx'>量角</button>
+            </view>
+            <view wx:else>
+              <button bindtap="GetAngle" size="mini" id='{{index}}m'style='margin-left:30rpx'>重新量角</button>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+    <!-- <view wx:for="{{kfmb_jhsj}}" wx:key="key">
     <view>{{item.name}}:</view>
 
     <view wx:if='{{item.mode == "slider"}}'>
@@ -52,5 +62,6 @@
     </view>
 
   </view> -->
-  <button class='subBtn' bindtap='submit' type="primary">提交数据</button>
+    <button class='subBtn' bindtap='submit' type="primary">提交数据</button>
+  </view>
 </view>

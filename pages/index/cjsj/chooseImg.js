@@ -123,7 +123,7 @@ Page({
   },
   submit: function () {
     wx.navigateTo({
-      url: './angle/angle?src=' + vm.data.tempFilePaths + '&imgW=' + vm.data.imgW + '&imgH=' + vm.data.imgH+'&index='+vm.data.index,
+      url: './getAngle/getangle?src=' + vm.data.tempFilePaths + '&imgW=' + vm.data.imgW + '&imgH=' + vm.data.imgH+'&index='+vm.data.index,
     })
   },
   actionSheetTap: function (e) {
