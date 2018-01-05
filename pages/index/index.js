@@ -48,7 +48,23 @@ Page({
    */
   onLoad: function (options) {
     vm = this;
-    util.showLoading();
+    
+    console.log("onready")
+    var userInfo = wx.getStorageSync("userInfo");
+    console.log("local storage userInfo:" + JSON.stringify(userInfo), !util.judgeIsAnyNullStr(userInfo));
+    //如果有缓存，代表已经注册过
+    if (!util.judgeIsAnyNullStr(userInfo)) {
+
+      app.globalData.userInfo = wx.getStorageSync("userInfo");
+      console.log("app.globalData.userInfo:" + JSON.stringify(app.globalData.userInfo));
+      wx.hideLoading()
+    } else {
+      //调用登录接口
+      app.login(function () {
+        vm.reLoad(app.globalData.userInfo);
+      });
+    }
+
     if(textData){
       vm.setData({
         task_today:[{
@@ -80,7 +96,8 @@ Page({
     vm.reLoad(app.globalData.userInfo);
   },
   reLoad: function(user){
-    if (user)
+    console.log('reLoad!');
+    if (!util.judgeIsAnyNullStr(user))
     util.getUserInfo(user, function (res1) {
       console.log('res1',res1)
       if (res1.data.result) {
@@ -89,9 +106,7 @@ Page({
         var user = res1.data.ret;
         user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
         user.birthday = user.birthday.substr(0, 10);
-        app.storeUserInfo(user);
-
-        
+        app.storeUserInfo(user);  
 
         // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
         var uid = app.globalData.userInfo.id;
@@ -206,20 +221,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log("onready")
-    var userInfo = wx.getStorageSync("userInfo");
-    console.log("local storage userInfo:" + JSON.stringify(userInfo), !util.judgeIsAnyNullStr(userInfo));
-    //如果有缓存，代表已经注册过
-    if (!util.judgeIsAnyNullStr(userInfo)) {
-      app.globalData.userInfo = wx.getStorageSync("userInfo");
-      console.log("app.globalData.userInfo:" + JSON.stringify(app.globalData.userInfo));
-      wx.hideLoading()
-    } else {
-      //调用登录接口
-      app.login(function(){
-        vm.reLoad(app.globalData.userInfo);
-      });
-    }
+    
   },
 
   /**

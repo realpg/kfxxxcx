@@ -53,7 +53,7 @@
 
     <view class="weui-cell">
       <view class="weui-cell__bd">城市</view>
-      <view class="weui-cell__ft ">{{user.city}}</view>
+      <view class="weui-cell__ft ">{{user.city?user.city:""}}</view>
     </view>
 
   </view>
