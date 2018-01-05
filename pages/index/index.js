@@ -198,8 +198,25 @@ Page({
         }, null)
 
       }
-      else{
-        //游客模式
+      else if (res1.data.code=='105'){
+        //重新注册
+        app.globalData.userInfo.id=null;
+        console.log("用户信息已经缺失",app.globalData.userInfo)
+        wx.showModal({
+          title: '用户信息已经丢失',
+          content: '请联系管理员或重新注册',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              app.login(function () {
+                vm.reLoad(app.globalData.userInfo);
+              });
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+        
       }
       
 
