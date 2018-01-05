@@ -59,5 +59,6 @@
         "selectedColor": "#1aad19"
       }
     ]
-  }
+  },
+  "debug": true
 }

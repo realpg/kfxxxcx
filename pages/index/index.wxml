@@ -18,7 +18,9 @@
 <!-- 任务 -->
 <view class="weui-panel">
   <view class="weui-panel__hd">今日任务</view>
-  <view wx:if="{{task_today.length==0}}" class="weui-panel__bd">今天没有康复任务哦</view>
+  <view class=""wx:if="{{task_today.length==0}}" style='margin:0 auto;height:300rpx;font-size:36rpx'>
+  <image class='noBorder'src='../../images/kfrw_n.jpg'style='width:750rpx;height:300rpx'></image>
+  </view>
   <block wx:else>
     <block wx:for="{{task_today}}" wx:key="key">
       <view class="weui-panel__bd">
@@ -30,7 +32,7 @@
           <view class="weui-media-box__info__meta">时间</view>
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view> -->
             <block wx:if="{{item.type=='kfjh'}}">
-              <button class="weui-media-box__info__meta btn" size='mini'bindtap="getInfo" id="{{item.info_id}}">相关资讯</button>
+              <button class="weui-media-box__info__meta btn" size='mini'bindtap="getInfo" id="{{item.xj_ids}}">相关资讯</button>
             </block>
             <block wx:elif="{{item.type == 'jhsj'}}">
               <button class="weui-media-box__info__meta btn" size='mini'bindtap="jumpToCjsj">采集数据</button>
@@ -55,6 +57,9 @@
 
   <!-- <view class="weui-cells__title">康复计划</view> -->
   <view class="weui-cells weui-cells_after-title">
+  <view class=""wx:if="{{kfjh.length==0}}" style='text-align:center;font-size:36rpx'>
+  <image class='noBorder'src='../../images/kfjh_n.jpg'style='width:750rpx;height:300rpx'></image>
+  </view>
     <view class="weui-cell" wx:for="{{time_axis}}" wx:key="key" bindtap='getkfjh'>
       <view class="weui-cell__bd" style="width:35%">{{item.time}}</view>
       <view class="weui-cell__ft" style="width:55%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</view>

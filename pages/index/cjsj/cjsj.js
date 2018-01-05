@@ -123,6 +123,7 @@ Page({
         return;
       }
     }
+    //这里调用上传数据接口
     var timestamp = Math.round(new Date().getTime() / 1000);
     console.log("数据提交完成:", vm.data.value,"当前时间戳为",timestamp)
     wx.navigateBack({

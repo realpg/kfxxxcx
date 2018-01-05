@@ -17,7 +17,7 @@ Page({
     vm=this;
 
     vm.setData({
-      user:app.globalData.user
+      user:app.globalData.userInfo
     })
   },
 
@@ -33,7 +33,7 @@ Page({
    */
   onShow: function () {
     vm.setData({
-      user: app.globalData.user
+      user: app.globalData.userInfo
     })
     console.log(vm.data.user)
   },

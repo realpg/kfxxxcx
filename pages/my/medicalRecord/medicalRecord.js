@@ -22,12 +22,12 @@ Page({
   onLoad: function (options) {
     vm=this;
 
-    var id = app.globalData.user.id;
+    var id = app.globalData.userInfo.id;
     util.getBLByUserId({id :id},function(res){
       console.log("bl:",res.data.ret)
       vm.setData({
         "data":res.data.ret,
-        "user": app.globalData.user
+        "user": app.globalData.userInfo
       })
     },null)
     util.getKFJHByUserId({id:id},function(res){

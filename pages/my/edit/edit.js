@@ -20,8 +20,8 @@ Page({
     vm = this;
 
     vm.setData({
-      user: app.globalData.user,
-      tempAvatarPath: app.globalData.user.avatar
+      user: app.globalData.userInfo,
+      tempAvatarPath: app.globalData.userInfo.avatar
     })
   },
 
@@ -92,11 +92,12 @@ Page({
 
           var param = e.detail.value;
           param.user_id = vm.data.user.id
+          param.token = vm.data.user.token
           console.log("param:", param)
           util.updateUserById(param, function (res1) {
             console.log(res1.data)
             if (res1.data.result) {
-              app.globalData.user = user_data
+              app.storeUserInfo(res1.data.ret)
               wx.showModal({
                 title: '成功',
                 content: "上传成功！",

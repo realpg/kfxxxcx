@@ -12,7 +12,7 @@
 } 
 page {
   height: 100%;font-size: 28rpx;
-  background: #f8f8f8;
+  background: #e9efef;
 }
 
 .page {

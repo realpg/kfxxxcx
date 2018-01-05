@@ -59,12 +59,12 @@
 
     <view class="weui-cell">
       <view class="weui-cell__bd">省份</view>
-      <view class="weui-cell__ft ">{{user.province}}</view>
+      <view class="weui-cell__ft ">{{user.province?user.province:""}}</view>
     </view>
 
     <view class="weui-cell">
       <view class="weui-cell__bd">城市</view>
-      <view class="weui-cell__ft ">{{user.city}}</view>
+      <view class="weui-cell__ft ">{{user.city?user.city:""}}</view>
     </view>
 
   </view>

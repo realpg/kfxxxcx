@@ -1,6 +1,7 @@
 var vm;
 const util = require('../../utils/util.js')
 const app = getApp()
+var textData=true
 
 function formatTime(time) {
   let unixtime = time
@@ -29,27 +30,7 @@ Page({
     time_axis: [],
 
     task_today: [
-      {
-        type: "kfjh",
-        name: "踝泵练习",
-        desc: "踝关节缓慢、有力、全范围的屈伸活动，每日500次以上。",
-        xj_ids: ["0001", "0004"],
-        status: '0',
-        info_id: "0001"
-      },
-      {
-        type: "kfjh",
-        name: "股四头肌收缩",
-        desc: "大腿前侧肌肉用力收缩、放松。每日500次以上",
-        xj_ids: ["0001", "0002", "0003"],
-        status: '0',
-        info_id: "0002"
-      },
-      {
-        type: "jhsj",
-        name: "采集数据",
-        desc: "您有 4 项数据需要采集"
-      }
+      
     ],
 
     imgUrls: [],//轮播图路径
@@ -68,20 +49,55 @@ Page({
   onLoad: function (options) {
     vm = this;
     util.showLoading();
+    if(textData){
+      vm.setData({
+        task_today:[{
+          type: "kfjh",
+          name: "踝泵练习",
+          desc: "踝关节缓慢、有力、全范围的屈伸活动，每日500次以上。",
+          xj_ids: "0001,0004",
+          status: '0',
+          info_id: "0001"
+        },
+        {
+          type: "kfjh",
+          name: "股四头肌收缩",
+          desc: "大腿前侧肌肉用力收缩、放松。每日500次以上",
+          xj_ids: "0001,0002,0003",
+          status: '0',
+          info_id: "0002,"
+        },
+        {
+          type: "jhsj",
+          name: "采集数据",
+          desc: "您有 4 项数据需要采集"
+        }]
+      })
+    }
+
     //获取用户信息
-    util.getUserInfo({ id: 8 }, function (res1) {
+    console.log("index:onload",JSON.stringify(app.globalData.userInfo))
+    vm.reLoad(app.globalData.userInfo);
+  },
+  reLoad: function(user){
+    if (user)
+    util.getUserInfo(user, function (res1) {
+      console.log('res1',res1)
       if (res1.data.result) {
         console.log("user_res:", res1)
+
         var user = res1.data.ret;
-        user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "女性");
+        user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
         user.birthday = user.birthday.substr(0, 10);
-        app.globalData.user = res1.data.ret
+        app.storeUserInfo(user);
+
+        
+
         // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
-        var uid = app.globalData.user.id;
+        var uid = app.globalData.userInfo.id;
         util.getKFJHByUserId({ id: uid }, function (res) {
           var kfjh = [];
           for (var x in res.data.ret) {
-            
             var start = formatTime(res.data.ret[x].start_time)
             var end = formatTime(res.data.ret[x].end_time)
             kfjh.push({
@@ -146,7 +162,7 @@ Page({
           }
           temp = temp.sort(compare('time_stamp'))
           //只留下部分计划（3个）
-          temp=temp.slice(0,3);
+          temp = temp.slice(0, 3);
 
 
           vm.setData({
@@ -166,31 +182,44 @@ Page({
           // }
         }, null)
 
-        util.getADs("", function (res) {
-          console.log("getADs:", res.data.ret)
-          var urls = [];
-          for (var x in res.data.ret) {
-            urls.push(res.data.ret[x].image)
-          }
-          vm.setData({
-            imgUrls: urls
-          })
-        }, null)
-
       }
+      else{
+        //游客模式
+      }
+      
 
     }, null)
-
-
-
     console.log(vm.data.time_axis)
+    util.getADs(function (resAD) {
+      console.log("getADs:xxxxxxxxxx", resAD.data.ret)
+      var urls = [];
+      for (var x in resAD.data.ret) {
+        urls.push(resAD.data.ret[x].image)
+      }
+      vm.setData({
+        imgUrls: urls
+      })
+    }, null)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log("onready")
+    var userInfo = wx.getStorageSync("userInfo");
+    console.log("local storage userInfo:" + JSON.stringify(userInfo), !util.judgeIsAnyNullStr(userInfo));
+    //如果有缓存，代表已经注册过
+    if (!util.judgeIsAnyNullStr(userInfo)) {
+      app.globalData.userInfo = wx.getStorageSync("userInfo");
+      console.log("app.globalData.userInfo:" + JSON.stringify(app.globalData.userInfo));
+      wx.hideLoading()
+    } else {
+      //调用登录接口
+      app.login(function(){
+        vm.reLoad(app.globalData.userInfo);
+      });
+    }
   },
 
   /**
@@ -224,7 +253,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    vm.onLoad()
+    vm.reLoad(app.globalData.userInfo)
   },
 
   /**
@@ -251,10 +280,11 @@ Page({
     })
   },
   getInfo: function (e) {
-    wx.navigateTo({
-      url: '/pages/textlist/article/article?id=' + e.currentTarget.id,
+    console.log(e);
+    wx.switchTab({
+      url: '../textlist/textlist?ids=' + e.currentTarget.id,
       success: function (res) { },
-      fail: function (res) { },
+      fail: function (res) { console.log("调用失败",res)},
       complete: function (res) { },
     })
   },

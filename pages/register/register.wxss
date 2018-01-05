@@ -1,1 +1,31 @@
 /* pages/register/register.wxss */
+.page__bd{
+  margin-left: 99rpx;
+  width: 552rpx;
+  font-size: 30rpx;
+}
+.weui-btn-area{
+  margin-left: 110rpx;
+  width: 552rpx;
+  font-size: 32rpx;
+  position: relative;
+  top: -58rpx
+}
+.icon{
+  width: 30rpx;
+  height: 30rpx;
+}
+.weui-cell__bd{
+  position: relative;
+  left: -90rpx
+}
+.weui-cell{
+  height: 92rpx;
+  text-align: left
+}
+.weui-label{
+  text-align: left
+}
+.weui-cell__ft{
+  margin-left: none
+}

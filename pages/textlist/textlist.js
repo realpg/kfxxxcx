@@ -28,7 +28,8 @@ Page({
    */
   onLoad: function (options) {
     vm = this
-
+    var ids=options.ids
+    console.log("文章列表",ids)
     //从服务器获取资讯列表
     util.showLoading()
     util.getArticleList({},function(res){

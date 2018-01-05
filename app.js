@@ -7,16 +7,7 @@ App({
   onLaunch: function () {
     vm = this
     //获取用户缓存数据
-    var userInfo = wx.getStorageSync("userInfo");
-    console.log("local storage userInfo:" + JSON.stringify(userInfo));
-    //如果有缓存，代表已经注册过
-    if (!util.judgeIsAnyNullStr(userInfo)) {
-      vm.globalData.userInfo = wx.getStorageSync("userInfo");
-      console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
-    } else {
-      //调用登录接口
-      vm.login(null);
-    }
+    
   },
   //登录处理
   login: function (callBack) {
@@ -33,7 +24,7 @@ App({
                 xcx_openid: openId,
                 account_type: "xcx"
               }
-              vm.loginServer(param);
+              vm.loginServer(param, callBack);
             }
           }, null)
         }
@@ -41,15 +32,19 @@ App({
     })
   },
   //远程调用登录接口
-  loginServer: function (param) {
+  loginServer: function (param, callBack) {
     console.log("loginServer param:" + JSON.stringify(param))
     util.login(param, function (ret) {
       console.log("login:" + JSON.stringify(ret))
       //如果登录成功，跳转到首页
-      if (ret.data.result == true) {
-
+      if (ret.data.result) {
+        vm.globalData.user=ret.data.ret;
+        vm.storeUserInfo(ret.data.ret)
+        console.log("登录成功", vm.globalData.user)
+        callBack();
       } else {
-        //登录失败，则引导到进行注册的页面 
+        //登录失败，则引导到进行注册的页面
+        console.log("登录失败", param)
         util.navigateToRegister(param);   //将openid带过去
       }
 
@@ -59,6 +54,8 @@ App({
   wxValidate: function (rules, messages) { new wxValidate(rules, messages) },
   //向globalData中存储数据
   storeUserInfo: function (obj) {
+    if (util.judgeIsAnyNullStr(obj.token))
+    obj.token = vm.globalData.userInfo.token;
     console.log("storeUserInfo :" + JSON.stringify(obj))
     wx.setStorage({
       key: "userInfo",
@@ -68,14 +65,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    user: {
-      name: "",
-      nickname: "这是一串昵称",
-      real_name: "李狗蛋",
-      birthday: "1978 - 09 - 01",
-      avatar: "/images/avatar.jpg",
-      phonenum: "13012345678",
-    },
   }
 
 })

@@ -17,7 +17,7 @@ Page({
     vm = this;
 
     vm.setData({
-      user: app.globalData.user
+      user: app.globalData.userInfo
     })
   },
 

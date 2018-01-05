@@ -17,7 +17,7 @@ Page({
    */
   onLoad: function (options) {
     vm=this;
-    var user_id = app.globalData.user.id;
+    var user_id = app.globalData.userInfo.id;
     util.getAnswerHistoryById({ user_id: user_id},function(res){
       console.log("lbs:",res.data.ret)
       vm.setData({

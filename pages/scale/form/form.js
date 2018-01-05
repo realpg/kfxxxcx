@@ -115,7 +115,7 @@ Page({
     console.log(result)
     //这里上传数据
     var param = {
-      user_id: app.globalData.user.id,
+      user_id: app.globalData.userInfo.id,
       lb_id: vm.data.id,
       result: result
     }

@@ -36,6 +36,7 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
 
     },
     complete: function () {
+      console.log(url+"____complete")
       hideLoading()
     }
   });
@@ -77,8 +78,21 @@ function updateUserById(param, successCallback, errorCallback) {
 }
 
 //获取首页轮播图
-function getADs(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/api/ad/getADs', param, "GET", successCallback, errorCallback);
+function getADs(successCallback, errorCallback) {
+  wx.request({
+    url: SERVER_URL + '/api/ad/getADs',
+    method: "GET", 
+    success: function(res){
+      console.log("ADs:", res)
+      successCallback(res);
+    },
+    fail: function (res){
+      errorCallback(res)
+      },
+    complete:function(res){
+      
+    }
+  })
 }
 //获取文章列表
 function getArticleList(param, successCallback, errorCallback) {
@@ -86,7 +100,7 @@ function getArticleList(param, successCallback, errorCallback) {
 }
 //获取文章类型列表
 function getArticleTypeList(successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/api/xj/getXJTypes', "", "GET", successCallback, errorCallback);
+  wxRequest(SERVER_URL + '/api/xj/getXJTypes', {}, "GET", successCallback, errorCallback);
 }
 //获取文章
 function getArticle(param, successCallback, errorCallback) {
@@ -94,7 +108,7 @@ function getArticle(param, successCallback, errorCallback) {
 }
 //获取量表列表
 function getLbList(successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/api/lb/getList', "", "GET", successCallback, errorCallback);
+  wxRequest(SERVER_URL + '/api/lb/getList', {}, "GET", successCallback, errorCallback);
 }
 //通过id获取量表问题
 function getQuesitionsById(param, successCallback, errorCallback) {
