@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/cjsj/getAngle/getangle",
     "pages/index/index",
+    "pages/register/register",
+    "pages/index/cjsj/getAngle/getangle",
     "pages/textlist/textlist",
     "pages/scale/scale",
     "pages/my/my",
@@ -25,7 +26,7 @@
     "navigationBarBackgroundColor": "#38373d",
     "navigationBarTitleText": "康复云平台",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#fff"
+    "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
     "list": [
