@@ -72,7 +72,7 @@
 .btn{
   color: black;
 }
-.noBorderRadius{
+.noBorder{
   border-radius:0px;
 }
 
@@ -85,19 +85,13 @@
   border-bottom: none;
 }
 .weui-panel{
-  padding-bottom: 0rpx
+  padding-bottom: 10rpx
 }
 .weui-panel__hd{
   color: black
 }
 .weui-cell:before{
   border-top: none;
-}
-.weui-panel{
-  margin-top: 1px;
-}
-.weui-panel__hd{
-  
 }
 .weui-panel:after {
   bottom: 0;
@@ -108,5 +102,5 @@
   border-top:none;
 }
 .weui-panel__hd:after{
-  
+  border-bottom: none;
 }

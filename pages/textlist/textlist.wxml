@@ -9,11 +9,10 @@
 </view> -->
 <view class="page"bindtouchstart="touchStart" catchtouchmove="touchMove" bindtouchend="touchEnd">
   <view class="page-bottom weui-cells typelist" wx:if="{{open}}">
-
-    <view class="page-content " wx:for="{{typelist}}"wx:for-index="idx">
-      <view class="weui-cell weui-cell_access type" id="{{idx}}" bindtap="chooseType">
+    <view class="page-content " wx:for="{{typelist}}">
+      <view class="weui-cell weui-cell_access type" id="type{{item.id}}" bindtap="chooseType">
         <view class="weui-cell__bd">
-          <view style="vertical-align: middle;text-align: center;width:230rpx;{{idx==index?'color:green;border-left:5px solid green':''}}">{{item.name}}</view>
+          <view style="vertical-align: middle;text-align: center;width:230rpx">{{item.name}}</view>
         </view>
       </view>
     </view>

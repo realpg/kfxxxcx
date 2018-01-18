@@ -36,7 +36,6 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
 
     },
     complete: function () {
-      console.log(url+"____complete")
       hideLoading()
     }
   });

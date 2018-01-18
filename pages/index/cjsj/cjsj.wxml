@@ -11,7 +11,7 @@
 
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <slider class="border-radius-5 border" id="{{index}}s" min="0" max="{{item.options.length-1}}" value="{{value[index]-1}}" bindchange="setSlider"></slider>
+            <slider class="border-radius-5 border" id="{{index}}s" step='0.1' min="0" max="{{item.options.length-1}}" value="{{value[index]-1}}" bindchange="setSlider"></slider>
           </view>
         </view>
       </view>

@@ -1,6 +1,6 @@
 <view class="page white-bg" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__hd">
-    <image src='../../images/logo.png' style='width:182rpx;height:182rpx;margin-top:174rpx;margin-bottom:158rpx;margin-left:284rpx'></image>
+      <image src='../../images/logo.png'style='width:182rpx;height:182rpx;margin-top:174rpx;margin-bottom:158rpx;margin-left:284rpx'></image>
   </view>
   <view class="page__bd">
     <view class="white-bg">
@@ -8,7 +8,7 @@
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <!-- <image class='icon'src="../../icons/name_icon.png" class="opt-icon-nor"></image> -->
+            <image src="../../icons/name_icon.png" class="opt-icon-nor"></image>
             姓名
           </view>
         </view>
@@ -20,7 +20,7 @@
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <!-- <image class='icon'src="../../icons/birthday_icon.png" class="opt-icon-nor"></image> -->
+            <image src="../../icons/birthday_icon.png" class="opt-icon-nor"></image>
             生日
           </view>
         </view>
@@ -36,31 +36,30 @@
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <!-- <image class='icon'src="../../icons/phone_icon.png" class="opt-icon-nor"></image> -->
+            <image src="../../icons/phone_icon.png" class="opt-icon-nor"></image>
             手机号
           </view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input grey-font" bindinput='phonenumInput' placeholder="请输入手机号" type='number' />
+          <input class="weui-input grey-font" bindinput='phonenumInput' placeholder="请输入手机号" type='number'/>
         </view>
       </view>
       <!-- 验证码 -->
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <!-- <image class='icon'src="../../icons/ver_icon.png" class="opt-icon-nor"></image> -->
+            <image src="../../icons/ver_icon.png" class="opt-icon-nor"></image>
             验证码
           </view>
         </view>
         <view class="weui-cell__bd">
 
-          <input class="weui-input grey-font" style='width:180rpx' bindinput='vertifyCodeInput' placeholder="请输入验证码" />
+          <input class="weui-input grey-font" bindinput='vertifyCodeInput' placeholder="请输入验证码" />
         </view>
-        <view class="weui-cell__ft">
-          <button class="weui-vcode-btn white-bg" style='width:150rpx;height:56rpx;font-size:24rpx;position:relative;left:-60rpx;' catchtap='clickSendSMS' disabled="{{cd_time>0}}">{{cd_time>0?cd_time:'获取验证码'}}</button>
+        <view class="weui-cell__ft" >
+        <button class="weui-vcode-btn"style='width:150rpx'catchtap='clickSendSMS'disabled="{{cd_time>0}}">{{cd_time>0?cd_time:'获取验证码'}}</button>
         </view>
       </view>
-      <view class='weui-cell'></view>
     </view>
   </view>
   <view class="weui-btn-area" catchtap='clickRegister'>

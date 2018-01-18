@@ -27,7 +27,8 @@ Page({
     this.setData({
       picPath: options.src,
       version: wx.getSystemInfoSync().SDKVersion,
-      index: options.index
+      index: options.index,
+      side:options.side
     })
     //var imageUtil = require(options.src);  
     //console.log(imageUtil)
@@ -380,12 +381,13 @@ Page({
     }
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 3]//当前页面前一个的前一个页面
-    var val = prevPage.data.value;
-    val[vm.data.index] = vm.data.angle.toFixed(2);
+    var val = prevPage.data.sj;
+    console.log(val,vm.data.index,vm.data.side);
+    val[vm.data.index].value[vm.data.side]=(vm.data.angle.toFixed(2));
     prevPage.setData({
-      value: val
+      sj: val
     })
-    console.log("数据为：", prevPage.data.value, vm.data.index)
+    console.log("数据为：", prevPage.data.sj, vm.data.index)
     wx.navigateBack({
       delta: 2,
     })

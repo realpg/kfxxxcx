@@ -7,7 +7,16 @@ App({
   onLaunch: function () {
     vm = this
     //获取用户缓存数据
-    
+    var userInfo = wx.getStorageSync("userInfo");
+    console.log("local storage userInfo:" + JSON.stringify(userInfo), !util.judgeIsAnyNullStr(userInfo));
+    //如果有缓存，代表已经注册过
+    if (!util.judgeIsAnyNullStr(userInfo)) {
+      vm.globalData.userInfo = wx.getStorageSync("userInfo");
+      console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
+    } else {
+      //调用登录接口
+      vm.login(null);
+    }
   },
   //登录处理
   login: function (callBack) {
@@ -24,7 +33,7 @@ App({
                 xcx_openid: openId,
                 account_type: "xcx"
               }
-              vm.loginServer(param, callBack);
+              vm.loginServer(param);
             }
           }, null)
         }
@@ -32,7 +41,7 @@ App({
     })
   },
   //远程调用登录接口
-  loginServer: function (param, callBack) {
+  loginServer: function (param) {
     console.log("loginServer param:" + JSON.stringify(param))
     util.login(param, function (ret) {
       console.log("login:" + JSON.stringify(ret))
@@ -41,7 +50,6 @@ App({
         vm.globalData.user=ret.data.ret;
         vm.storeUserInfo(ret.data.ret)
         console.log("登录成功", vm.globalData.user)
-        callBack();
       } else {
         //登录失败，则引导到进行注册的页面
         console.log("登录失败", param)

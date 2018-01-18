@@ -1,0 +1,27 @@
+<!--pages/index/cjsj/getAngle/getangle.wxml-->
+<view catchtouchmove=''>
+  <view class="btnArea" style="position:absolute;top:{{canvasHeight}}px">
+    <button class='btn-2 weui-btn weui-btn_primary=' style="width:25%;display: inline-block;" class="reset" bindtap="reset">重置</button>
+    <button class='btn-2 weui-btn weui-btn_primary' style="width:25%;display: inline-block;" class="save" bindtap="saveCanvas">保存</button>
+    <button class='btn-2 weui-btn weui-btn_primary' style="width:25%;display: inline-block;" class="upload" bindtap="edit">编辑</button>
+    <button class='btn-2 weui-btn weui-btn_primary' style="width:25%;display: inline-block;" class="submit" bindtap="submit" type='prime'>完成</button>
+  </view>
+  <view class='canvas' bindtap="tap">
+    <canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" canvas-id="firstCanvas">
+      <view wx:if='{{show}}' class='picker'>
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" bindchange="changecolor">
+          <picker-view-column>
+            <view wx:for="{{colors}}" style="text-align:center;line-height: 50px;color:{{item}}">线段颜色{{item}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{colors}}" style="text-align:center;line-height: 50px;color:{{item}}">字体颜色{{item}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </canvas>
+  </view>
+  <image wx:if='{{left[0]!=null&&top[0]!=null}}' class='disappear' id='0' class='movable' src='{{btn_path}}' style='left:{{left[0]}}px;top:{{top[0]}}px;' bindtouchmove='viewTouchMove'></image>
+  <image wx:if='{{left[1]!=null&&top[1]!=null}}' class='disappear' id='1' class='movable' src='{{btn_path}}' style='left:{{left[1]}}px;top:{{top[1]}}px;' bindtouchmove='viewTouchMove'></image>
+  <image wx:if='{{left[2]!=null&&top[2]!=null}}' class='disappear' id='2' class='movable' src='{{btn_path}}' style='left:{{left[2]}}px;top:{{top[2]}}px;' bindtouchmove='viewTouchMove'></image>
+
+</view>

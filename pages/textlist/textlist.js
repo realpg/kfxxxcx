@@ -18,7 +18,6 @@ Page({
     page:1,
     searchResult: [],
     open:false,
-    index:0,
     typelist: [{
       id: "", name: "全部", desc: "全部"
     }]
@@ -173,15 +172,9 @@ Page({
     console.log("点击");
   },
   chooseType:function(e){
-    console.log(parseInt(e.currentTarget.id))
-    var index = parseInt(e.currentTarget.id);
-    vm.setData({
-      index: index
-    })
-    console.log("点击了", vm.data.index, vm.data.typelist[index])
-    var id=vm.data.typelist[index].id;
+    console.log(e.currentTarget.id.substr(4))
     //从服务器获取资讯列表
-    util.getArticleList({ type: id}, function (res) {
+    util.getArticleList({ type: e.currentTarget.id.substr(4)}, function (res) {
       console.log("res:", res.data.ret.data);
       var text = [];
       for (var x in res.data.ret.data) {
@@ -197,9 +190,9 @@ Page({
         text: text
       })
     }, null)
-    // vm.setData({
-    //   open: !vm.data.open
-    // })
+    vm.setData({
+      open: !vm.data.open
+    })
     vm.clearInput()
   },
   // 触摸开始事件 

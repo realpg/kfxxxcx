@@ -9,7 +9,7 @@
         <view class="weui-cell ans" wx:for="{{item.answer}}" wx:for-item="option" wx:for-index="idx">
           <label>
             <radio value="{{idx}}" />
-            <view style='margin-left:10rpx;display:inline'>{{option}}   ;分数:   {{item.point[idx]}}</view>
+            <view style='margin-left:10rpx;display:inline'>{{option}}   ;</view>
           </label>
         </view>
       </radio-group>

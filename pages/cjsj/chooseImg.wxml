@@ -1,0 +1,23 @@
+<!--pages/index/cjsj/chooseImg.wxml-->
+<!--index.wxml-->
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
+  <action-sheet-item bindtap="chooseImage">从相册获取</action-sheet-item>
+  <action-sheet-item bindtap="takePhoto">拍照</action-sheet-item>
+  <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
+<view class='page' catchtouchmove=''>
+  <view wx:if="{{!isPhotoToken}}" class='session'>
+    <view class='title'>使用须知</view>
+    <text class='text'>
+    ①先摆正拍照姿势，手机平行测量位置的外侧拍好照片 
+    ②在照片上按顺序找到关键点，手指轻点一下 
+    ③测量最大活动角度=180-照片上显示的角度=照片括号内的角度
+    </text>
+    <button style="margin-top:280rpx;width:80%" type="default" bindtap="actionSheetTap" type="primary">获取图片</button>
+  </view>
+  
+<view wx:else class='session' style='text-align:center'>
+  <image src="{{tempFilePaths }}" mode="aspectFit" style="width:480rpx; height:854rpx;vertical-align:middle;" bindtap="actionSheetTap" bindload="imageLoad" />
+  <button class=' btn-1' bindtap='submit' type="primary" style="width:80%">提交</button>
+</view>
+</view>

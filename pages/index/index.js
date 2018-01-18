@@ -48,23 +48,7 @@ Page({
    */
   onLoad: function (options) {
     vm = this;
-    
-    console.log("onready")
-    var userInfo = wx.getStorageSync("userInfo");
-    console.log("local storage userInfo:" + JSON.stringify(userInfo), !util.judgeIsAnyNullStr(userInfo));
-    //如果有缓存，代表已经注册过
-    if (!util.judgeIsAnyNullStr(userInfo)) {
-
-      app.globalData.userInfo = wx.getStorageSync("userInfo");
-      console.log("app.globalData.userInfo:" + JSON.stringify(app.globalData.userInfo));
-      wx.hideLoading()
-    } else {
-      //调用登录接口
-      app.login(function () {
-        vm.reLoad(app.globalData.userInfo);
-      });
-    }
-
+    util.showLoading();
     if(textData){
       vm.setData({
         task_today:[{
@@ -96,8 +80,7 @@ Page({
     vm.reLoad(app.globalData.userInfo);
   },
   reLoad: function(user){
-    console.log('reLoad!');
-    if (!util.judgeIsAnyNullStr(user))
+    if (user)
     util.getUserInfo(user, function (res1) {
       console.log('res1',res1)
       if (res1.data.result) {
@@ -106,7 +89,9 @@ Page({
         var user = res1.data.ret;
         user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
         user.birthday = user.birthday.substr(0, 10);
-        app.storeUserInfo(user);  
+        app.storeUserInfo(user);
+
+        
 
         // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
         var uid = app.globalData.userInfo.id;
@@ -198,25 +183,8 @@ Page({
         }, null)
 
       }
-      else if (res1.data.code=='105'){
-        //重新注册
-        app.globalData.userInfo.id=null;
-        console.log("用户信息已经缺失",app.globalData.userInfo)
-        wx.showModal({
-          title: '用户信息已经丢失',
-          content: '请联系管理员或重新注册',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-              app.login(function () {
-                vm.reLoad(app.globalData.userInfo);
-              });
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-        
+      else{
+        //游客模式
       }
       
 
@@ -238,7 +206,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**

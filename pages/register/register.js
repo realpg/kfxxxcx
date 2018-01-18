@@ -148,15 +148,11 @@ Page({
                   })
                 }
               })
-              var pages = getCurrentPages();
-              if (pages.length > 1) {
-                //上一个页面实例对象
-                var prePage = pages[pages.length - 2];
-                prePage.reLoad(app.globalData.userInfo);
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
+              
+              
+              wx.navigateBack({
+                delta: 1
+              })
               
             }
           }

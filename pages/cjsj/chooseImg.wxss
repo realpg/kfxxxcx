@@ -1,0 +1,52 @@
+/* pages/index/cjsj/chooseImg.wxss */
+.page{
+  margin-top: 31rpx;
+  background-color: white;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  height: 1120rpx;
+}
+.session{
+  background-color: white;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  margin-top: 31rpx;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+}
+.title{
+  font-size: 34rpx;
+  color: black;
+  margin-bottom:10rpx;
+  
+}
+.text{
+  color: #999;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+}
+.btn-1 {
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+.btn-1 button {
+  width: 90%;
+  outline: none;
+  border: none;
+  background: #18b4ed;
+  color: #fff;
+  height: 5rem;
+  display: inline-block;
+  border-radius: 0.4rem;
+  font-size: 2rem;
+}
+
+.enter .btn-2, .enter .btn-3 {
+  border: 0;
+  outline: none;
+  background: #18b4ed;
+  color: #fff;
+  height: 100%;
+  width: 8rem;
+  font-size: 2rem;
+}

@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/cjsj/cjsj",
+    "pages/cjsj/chooseImg",
+    "pages/cjsj/getAngle/getangle",
     "pages/index/index",
     "pages/register/register",
     "pages/index/cjsj/getAngle/getangle",
@@ -19,7 +22,9 @@
     "pages/scale/form/form",
     "pages/my/medicalRecord/medicalRecord",
     "pages/scale/history/history",
-    "pages/scale/history/detail/detail"
+    "pages/scale/history/detail/detail",
+    "pages/cjsj/piteng/piteng",
+    "pages/cjsj/weidu/weidu"
   ],
   "window": {
     "backgroundTextStyle": "dark",
