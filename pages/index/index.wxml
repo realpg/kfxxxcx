@@ -88,3 +88,6 @@
     </view>
   </view>
 </view>
+<view bindtap='cjsj'>
+采集数据
+</view>

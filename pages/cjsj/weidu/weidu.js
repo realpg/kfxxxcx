@@ -1,18 +1,24 @@
 // pages/cjsj/weidu/weidu.js
+var vm;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    value:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    vm=this;
+    console.log("weidu onload",options.index,options.side)
+    vm.setData({
+      index:options.index,
+      side:options.side
+    })
   },
 
   /**
@@ -62,5 +68,33 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+  changeValue:function(e){
+    console.log(e.detail)
+    vm.setData({
+      value:e.detail.value
+    })
+  },
+  submit: function () {
+    if (vm.data.value == 0) {
+      wx.showModal({
+        title: '提交失败',
+        content: '获取角度失败，请先获取角度',
+        showCancel: false
+      })
+      return;
+    }
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]//当前页面前一个的前一个页面
+    var val = prevPage.data.sj;
+    console.log(val, vm.data.index, vm.data.side);
+    val[vm.data.index].value[vm.data.side] = (vm.data.value);
+    prevPage.setData({
+      sj: val
+    })
+    console.log("数据为：", prevPage.data.sj, vm.data.index)
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
 })

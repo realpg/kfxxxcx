@@ -1,4 +1,4 @@
-<!--pages/cjsj/weidu/weidu.wxml-->
+<!--pages/cjsj/piwen/piwen.wxml-->
 请输入您的测量值：
 <input type='digit'value="{{value}}" bindchange='changeValue'> </input>
 <view bindtap='submit'>提交</view>

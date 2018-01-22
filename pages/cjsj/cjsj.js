@@ -34,7 +34,7 @@ Page({
         doctor_id: 1,
         position: 1,
         type: 3,
-        side: 1,
+        side: 0,
         desc: "肩部角度"
       },{
         id: 1,
@@ -182,4 +182,7 @@ Page({
       url: 'weidu/weidu?index=' + i + '&side=' + side,
     })
   },
+  submit:function(){
+    console.log("submit", JSON.stringify(vm.data.sj))
+  }
 })

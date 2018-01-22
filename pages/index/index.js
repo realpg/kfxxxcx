@@ -288,5 +288,13 @@ Page({
       url: '/pages/textlist/textlist',
     })
   },
+  cjsj:function(){
+    wx.navigateTo({
+      url: "/pages/cjsj/cjsj",
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  }
   
 })

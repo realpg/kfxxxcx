@@ -1,14 +1,15 @@
 {
   "pages": [
-    "pages/cjsj/cjsj",
-    "pages/cjsj/chooseImg",
-    "pages/cjsj/getAngle/getangle",
+    
     "pages/index/index",
     "pages/register/register",
     "pages/index/cjsj/getAngle/getangle",
     "pages/textlist/textlist",
     "pages/scale/scale",
     "pages/my/my",
+    "pages/cjsj/cjsj",
+    "pages/cjsj/chooseImg",
+    "pages/cjsj/getAngle/getangle",
     "pages/index/cjsj/cjsj",
     "pages/index/cjsj/chooseImg",
     "pages/index/cjsj/angle/angle",
@@ -24,7 +25,8 @@
     "pages/scale/history/history",
     "pages/scale/history/detail/detail",
     "pages/cjsj/piteng/piteng",
-    "pages/cjsj/weidu/weidu"
+    "pages/cjsj/weidu/weidu",
+    "pages/cjsj/piwen/piwen"
   ],
   "window": {
     "backgroundTextStyle": "dark",

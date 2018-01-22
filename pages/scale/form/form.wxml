@@ -2,30 +2,67 @@
 
 <form bindsubmit="formSubmit">
   <view wx:for="{{questions}}" wx:key="key" class="weui-cells">
-    <view class="weui-cell que"><view class='num'></view>{{index+1}}.{{item.question}}</view>
 
     <block wx:if="{{item.type==0}}">
-      <radio-group name="{{index}}">
-        <view class="weui-cell ans" wx:for="{{item.answer}}" wx:for-item="option" wx:for-index="idx">
+      <view class="weui-cell que">
+        <view class='num'>{{index+1}}</view>.{{item.question}}</view>
+      <radio-group name="{{index}}" id="{{index}}" bindchange="xuanze">
+        <view class="weui-cell ans" wx:for="{{item.option}}" wx:for-item="option" wx:for-index="idx">
           <label>
             <radio value="{{idx}}" />
-            <view style='margin-left:10rpx;display:inline'>{{option}}   ;</view>
+            <view style='margin-left:10rpx;display:inline'>{{option}}</view>
           </label>
         </view>
       </radio-group>
     </block>
 
     <block wx:elif="{{item.type==1}}">
-      <checkbox-group name="{{index}}">
-        <view class="weui-cell ans" wx:for="{{item.answer}}" wx:for-item="option" wx:for-index="idx">
+      <view class="weui-cell que">
+        <view class='num'>{{index+1}}</view>.{{item.question}}</view>
+      <checkbox-group name="{{index}}" id="{{index}}" bindchange="xuanze">
+        <view class="weui-cell ans" wx:for="{{item.option}}" wx:for-item="option" wx:for-index="idx">
           <label>
             <checkbox value="{{idx}}" />
-            <view style='margin-left:10rpx;display:inline'>{{option}}--{{item.point[idx]}}</view>
+            <view style='margin-left:10rpx;display:inline'>{{option}}</view>
           </label>
         </view>
       </checkbox-group>
     </block>
 
+    <block wx:elif="{{item.type==2}}">
+      <view class="weui-cell que">
+        <view class='num'>{{index+1}}.</view>
+      </view>
+      <view style='display:inline' wx:for="{{item.questions}}" wx:for-item="que" wx:for-index="idx">
+        {{que}}
+        <block wx:if="{{idx<item.answers.length}}">
+          <input style='display:inline-block;color:green;border-bottom:1rpx solid black;width:{{item.answers[idx].width}}' id="{{index+'-'+idx}}" bindchange="tiankong" value='{{item.answers[idx].value}}'></input>
+        </block>
+      </view>
+    </block>
+
+    <block wx:elif="{{item.type==3}}">
+      <view class="weui-cell que">
+        <view class='num'>{{index+1}}</view>.{{item.question}}</view>
+      <view class='table'>
+
+        <view class='tr'>
+          <view class='th'>问题</view>
+          <block wx:for="{{item.options}}" wx:for-item="opt">
+            <view class='th'>{{opt}}</view>
+          </block>
+        </view>
+        <view class="tr" wx:for="{{item.questions}}" wx:for-item="ques" wx:for-index="que_idx">
+          <view class='td'>{{ques}}</view>
+          <block wx:for="{{item.options}}" wx:for-item="opt" wx:for-index="opt_idx">
+            <view class='td'>
+              <radio style="" id="{{index+'-'+que_idx+'-'+opt_idx}}" checked="{{item.results[que_idx][opt_idx]}}" bindtap="biaoge" />
+            </view>
+          </block>
+        </view>
+
+      </view>
+    </block>
   </view>
 
   <view class="btn-area">

@@ -1,5 +1,5 @@
-// pages/cjsj/piteng/piteng.js
-var vm;
+// pages/cjsj/piwen/piwen.js
+var vm
 Page({
 
   /**
@@ -71,9 +71,8 @@ Page({
   },
   changeValue: function (e) {
     console.log(e.detail)
-    var val = Math.round(e.detail.value*10)/10;
     vm.setData({
-      value: val
+      value: e.detail.value
     })
   },
   submit: function () {

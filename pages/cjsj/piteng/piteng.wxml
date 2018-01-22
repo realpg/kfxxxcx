@@ -1,2 +1,5 @@
 <!--pages/cjsj/piteng/piteng.wxml-->
-<text>pages/cjsj/piteng/piteng.wxml</text>
+请输入您的测量值：
+<slider min="0" max="10" step='0.1' value='{{value}}' bindchange='changeValue'></slider>
+<view bindtap='submit'>提交</view>
+
