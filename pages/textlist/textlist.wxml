@@ -7,7 +7,7 @@
     </view>
   </view>
 </view> -->
-<view class="page"bindtouchstart="touchStart" catchtouchmove="touchMove" bindtouchend="touchEnd">
+<view class="page"bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
   <view class="page-bottom weui-cells typelist" wx:if="{{open}}">
     <view class="page-content " wx:for="{{typelist}}">
       <view class="weui-cell weui-cell_access type" id="type{{item.id}}" bindtap="chooseType">

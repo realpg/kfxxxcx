@@ -19,8 +19,8 @@
     </view>
 
     <view class="weui-cell">
-      <view class="weui-cell__hd"><p>籍</p><p>贯</p></view>:
-      <view class="weui-cell__bd">{{user.province}}省{{user.city}}市</view>
+      <view class="weui-cell__hd"><p>住</p><p>址</p></view>:
+      <view class="weui-cell__bd">{{user.province?user.province+"省":""}}{{user.city?user.city+'市':''}}</view>
     </view>
 
     <view class="weui-cell">
@@ -36,18 +36,13 @@
     </view>
 
     <view class="weui-cell">
-      <view class="weui-cell__hd" wx:if="{{data.wt_time}}"><p>首</p><p>次</p><p>弯</p><p>腿</p></view>:
-      <view class="weui-cell__bd">{{data.wt_time}}</view>
+      <view class="weui-cell__hd" ><p>主</p><p>治</p><p>医</p><p>生</p></view>:
+      <view class="weui-cell__bd">{{data.zz_doctor?data.zz_doctor.name:"未知"}}</view>
     </view>
 
     <view class="weui-cell">
-      <view class="weui-cell__hd" wx:if="{{data.zz_doctor.name}}"><p>主</p><p>治</p><p>医</p><p>生</p></view>:
-      <view class="weui-cell__bd">{{data.zz_doctor.name}}</view>
-    </view>
-
-    <view class="weui-cell">
-      <view class="weui-cell__hd" wx:if="{{data.kf_doctor.name}}"><p>康</p><p>复</p><p>医</p><p>师</p></view>:
-      <view class="weui-cell__bd">{{data.kf_doctor.name}}</view>
+      <view class="weui-cell__hd" ><p>康</p><p>复</p><p>医</p><p>师</p></view>:
+      <view class="weui-cell__bd">{{data.kf_doctor?data.kf_doctor.name:"未知"}}</view>
     </view>
 
     <view class="weui-cell">

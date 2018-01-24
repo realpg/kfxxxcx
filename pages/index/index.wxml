@@ -18,27 +18,21 @@
 <!-- 任务 -->
 <view class="weui-panel">
   <view class="weui-panel__hd">今日任务</view>
-  <view class=""wx:if="{{task_today.length==0}}" style='margin:0 auto;height:300rpx;font-size:36rpx'>
-  <image class='noBorder'src='../../images/kfrw_n.jpg'style='width:750rpx;height:300rpx'></image>
+  <view class="" wx:if="{{task_today.length==0}}" style='margin:0 auto;height:300rpx;font-size:36rpx'>
+    <image class='noBorder' src='../../images/kfrw_n.jpg' style='width:750rpx;height:300rpx'></image>
   </view>
   <block wx:else>
     <block wx:for="{{task_today}}" wx:key="key">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
           <view class="weui-media-box__title weui-media-box__title_in-text">{{item.name}}</view>
-          <view class="weui-media-box__desc">{{item.desc}}</view>
+          <view class="weui-media-box__desc"style="overflow:scroll;-webkit-line-clamp: 4;"><text>{{item.desc}}</text></view>
           <view class="weui-media-box__info">
             <!-- <view class="weui-media-box__info__meta">文字来源</view>
           <view class="weui-media-box__info__meta">时间</view>
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view> -->
-            <block wx:if="{{item.type=='kfjh'}}">
-              <button class="weui-media-box__info__meta btn" size='mini'bindtap="getInfo" id="{{item.xj_ids}}">相关资讯</button>
-            </block>
-            <block wx:elif="{{item.type == 'jhsj'}}">
-              <button class="weui-media-box__info__meta btn" size='mini'bindtap="jumpToCjsj">采集数据</button>
-            </block>
-            <block wx:else>
-              <button class="weui-media-box__info__meta btn" size='mini'bindtap="">跳转</button>
+            <block>
+              <button class="weui-media-box__info__meta btn" size='mini' bindtap="getInfo" id="{{item.xj_ids}}">相关资讯</button>
             </block>
           </view>
         </view>
@@ -49,20 +43,16 @@
 
 <view class="weui-panel weui-panel_access">
   <view class="weui-panel__hd">康复计划</view>
-  <!-- <view class=" kfjh" bindtap='getkfjh'>
-    <image src="../../icons/flag.png" mode="aspectFit" class="sessionIcon"></image>
-    <view class="sessionTitle">康复计划</view>
-    <view wx:for="{{time_axis}}" wx:key="key">{{item.time}}:{{item.title}}</view>
-  </view> -->
-
-  <!-- <view class="weui-cells__title">康复计划</view> -->
   <view class="weui-cells weui-cells_after-title">
-  <view class=""wx:if="{{kfjh.length==0}}" style='text-align:center;font-size:36rpx'>
-  <image class='noBorder'src='../../images/kfjh_n.jpg'style='width:750rpx;height:300rpx'></image>
-  </view>
-    <view class="weui-cell" wx:for="{{time_axis}}" wx:key="key" bindtap='getkfjh'>
+    <view class="" wx:if="{{kfjh.length==0}}" style='text-align:center;font-size:36rpx'>
+      <image class='noBorder' src='../../images/kfjh_n.jpg' style='width:750rpx;height:300rpx'></image>
+    </view>
+    <view class="weui-cell" wx:for="{{time_axis}}" wx:key="key">
       <view class="weui-cell__bd" style="width:35%">{{item.time}}</view>
-      <view class="weui-cell__ft" style="width:55%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</view>
+      <view class="weui-cell__ft" style="width:65%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</view>
+    </view>
+    <view class="weui-cell"bindtap='getkfjh'>
+      <view class="weui-cell__bd" style='color:blue;'>点击查看康复计划</view>
     </view>
   </view>
 </view>
@@ -76,18 +66,18 @@
         <image class="weui-media-box__thumb" src="{{kp.cover}}" />
       </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-        <view class="weui-media-box__title"style=''>{{kp.title}}</view>
+        <view class="weui-media-box__title" style=''>{{kp.title}}</view>
         <view class="weui-media-box__desc">{{kp.desc}}</view>
       </view>
     </navigator>
   </view>
   <view class="weui-panel__ft">
     <view class="weui-cell weui-cell_access weui-cell_link" bindtap='toTextList'>
-      <view class="weui-cell__bd"style='text-align:center'>查看更多</view>
+      <view class="weui-cell__bd" style='text-align:center'>查看更多</view>
       <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
     </view>
   </view>
 </view>
 <view bindtap='cjsj'>
-采集数据
+  采集数据
 </view>

@@ -157,9 +157,9 @@ Page({
     var questions = vm.data.questions;
     for (var i in questions) {
       console.log(e.detail.value[i])
-      var answer = questions[i].type == 2 ? questions[i].answer+"" : questions[i].answer
+      var answer = questions[i].type == 2 ? questions[i].answer + "" : questions[i].answer
 
-        result +='@a=' + answer
+      result += '@a=' + answer
     }
     console.log(result)
     //这里上传数据
@@ -185,8 +185,6 @@ Page({
           }
         })
       }, null)
-
-
 
   },
   biaoge: function (e) {
@@ -221,11 +219,11 @@ Page({
     var width = e.detail.value.length * 34;
     questions[index].answers[i].width = (width > 100 ? width : 100) + "rpx";
 
-    questions[index].answer ="";
-    for (var x in questions[index].answers){
-      questions[index].answer += "&bk="+questions[index].answers[x].value;
+    questions[index].answer = "";
+    for (var x in questions[index].answers) {
+      questions[index].answer += "&bk=" + questions[index].answers[x].value;
     }
-      
+
     vm.setData({
       questions: questions
     })

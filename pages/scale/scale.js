@@ -5,7 +5,6 @@ const app = getApp()
 
 Page({
   data: {
-    // text:"这是一个页面"
     index:0,
     open:true
   },

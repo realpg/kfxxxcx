@@ -1,5 +1,5 @@
 //测试标识
-var TESTMODE = false;
+var TESTMODE = true;
 //服务器地址
 var SERVER_URL = "http://kfxx.isart.me";
 var DEBUG_URL = "http://localhost/kfypt/public";
@@ -133,6 +133,14 @@ function getBLByUserId(param, successCallback, errorCallback) {
 function getKFJHByUserId(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/api/kfjh/getKFJHByUserId', param, "GET", successCallback, errorCallback);
 }
+//获取今日康复任务
+function getUserZXJHByDate(successCallback, errorCallback){
+  var now=new Date();
+  var today=formatDate(now);
+  var param={date:today}
+  console.log("getuserzxjh",param);
+  wxRequest(SERVER_URL + '/api/userCase/getUserZXJHByDate', param, "POST", successCallback, errorCallback);
+}
 //通过id获取计划数据
 function getKFSJByUserId(param, successCallback, errorCallback) {
   wxRequest(SERVER_URL + '/api/kfjh/getKFSJByUserId', param, "GET", successCallback, errorCallback);
@@ -238,6 +246,16 @@ const formatTime = date => {
   const second = date.getSeconds()
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+const formatDate = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('-') 
 }
 
 //优化字符串输出，如果str为空，则返回r_str
@@ -527,9 +545,10 @@ module.exports = {
   getAnswerHistoryById: getAnswerHistoryById,
   getBLByUserId: getBLByUserId,
   getKFJHByUserId: getKFJHByUserId,
-  getKFSJByUserId: getKFSJByUserId,
+  getUserZXJHByDate: getUserZXJHByDate,
 
   formatTime: formatTime,
+  formatDate: formatDate,
   showLoading: showLoading,
   hideLoading: hideLoading,
   showToast: showToast,

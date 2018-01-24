@@ -1,7 +1,7 @@
 var vm;
 const util = require('../../utils/util.js')
 const app = getApp()
-var textData=true
+var textData = true
 
 function formatTime(time) {
   let unixtime = time
@@ -30,7 +30,7 @@ Page({
     time_axis: [],
 
     task_today: [
-      
+
     ],
 
     imgUrls: [],//轮播图路径
@@ -49,146 +49,170 @@ Page({
   onLoad: function (options) {
     vm = this;
     util.showLoading();
-    if(textData){
-      vm.setData({
-        task_today:[{
-          type: "kfjh",
-          name: "踝泵练习",
-          desc: "踝关节缓慢、有力、全范围的屈伸活动，每日500次以上。",
-          xj_ids: "0001,0004",
-          status: '0',
-          info_id: "0001"
-        },
-        {
-          type: "kfjh",
-          name: "股四头肌收缩",
-          desc: "大腿前侧肌肉用力收缩、放松。每日500次以上",
-          xj_ids: "0001,0002,0003",
-          status: '0',
-          info_id: "0002,"
-        },
-        {
-          type: "jhsj",
-          name: "采集数据",
-          desc: "您有 4 项数据需要采集"
-        }]
-      })
-    }
+    if (false)
+      if (textData) {
+        vm.setData({
+          task_today: [{
+            type: "kfjh",
+            name: "踝泵练习",
+            desc: "踝关节缓慢、有力、全范围的屈伸活动，每日500次以上。",
+            xj_ids: "0001,0004",
+            status: '0',
+            info_id: "0001"
+          },
+          {
+            type: "kfjh",
+            name: "股四头肌收缩",
+            desc: "大腿前侧肌肉用力收缩、放松。每日500次以上",
+            xj_ids: "0001,0002,0003",
+            status: '0',
+            info_id: "0002,"
+          }]
+        })
+      }
 
     //获取用户信息
-    console.log("index:onload",JSON.stringify(app.globalData.userInfo))
+    console.log("index:onload", JSON.stringify(app.globalData.userInfo))
     vm.reLoad(app.globalData.userInfo);
   },
-  reLoad: function(user){
+  reLoad: function (user) {
     if (user)
-    util.getUserInfo(user, function (res1) {
-      console.log('res1',res1)
-      if (res1.data.result) {
-        console.log("user_res:", res1)
+      util.getUserInfo(user, function (res1) {
+        console.log('res1', res1)
+        if (res1.data.result) {
+          console.log("user_res:", res1)
 
-        var user = res1.data.ret;
-        user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
-        user.birthday = user.birthday.substr(0, 10);
-        app.storeUserInfo(user);
-
-        
-
-        // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
-        var uid = app.globalData.userInfo.id;
-        util.getKFJHByUserId({ id: uid }, function (res) {
-          var kfjh = [];
-          for (var x in res.data.ret) {
-            var start = formatTime(res.data.ret[x].start_time)
-            var end = formatTime(res.data.ret[x].end_time)
-            kfjh.push({
-              desc: res.data.ret[x].name,
-              startDate: start,
-              endDate: end,
-              unix_timestamp_s: res.data.ret[x].start_time,
-              unix_timestamp_e: res.data.ret[x].end_time,
-            })
-          }
-          vm.setData({
-            'kfjh': kfjh
-          })
-          //以下为将康复计划转化为时间轴
+          var user = res1.data.ret;
+          user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
+          user.birthday = user.birthday.substr(0, 10);
+          app.storeUserInfo(user);
 
 
-          var temp = []
 
-          var i;
-          for (i in vm.data.kfjh) {
-            if (temp.length == 0) {
-              temp.push({
-                time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                title: [vm.data.kfjh[i].desc + "开始"],
-                time: vm.data.kfjh[i].startDate
-              }, {
-                  time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                  title: [vm.data.kfjh[i].desc + "结束"],
-                  time: vm.data.kfjh[i].endDate
-                }
-              )
+          // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
+          var uid = app.globalData.userInfo.id;
+          util.getKFJHByUserId({ id: uid }, function (res) {
+            var kfjh = [];
+            for (var x in res.data.ret) {
+              
+              kfjh.push({
+                type: res.data.ret[x].btime_type,
+                name: res.data.ret[x].name,
+                startDate: res.data.ret[x].start_date,
+                endDate: res.data.ret[x].end_date,
+                setDate: res.data.ret[x].set_date,
+                unix_timestamp_set: res.data.ret[x].set_date_time_stamp,
+                unix_timestamp_s: res.data.ret[x].start_time_stamp,
+                unix_timestamp_e: res.data.ret[x].end_time_stamp,
+              })
             }
-            else {
-              var flagS = false;
-              var flagE = false;
-              var j
-              for (j in temp) {
-                if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
-                  temp[j].title.push(vm.data.kfjh[i].desc + "开始");
-                  flagS = true;
-                }
-                if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
-                  temp[j].title.push(vm.data.kfjh[i].desc + "结束");
-                  flagE = true;
-                }
+            vm.setData({
+              'kfjh': kfjh
+            })
+            //以下为将康复计划转化为时间轴
+            var temp = []
+
+            var i;
+            for (i in vm.data.kfjh) {
+              if (vm.data.kfjh[i].type == 2 && temp.length == 0) {
+                temp.push({
+                  time_stamp: vm.data.kfjh[i].unix_timestamp_set,
+                  title: [vm.data.kfjh[i].name],
+                  time: vm.data.kfjh[i].setDate
+                })
+                continue;
               }
-              if (!flagS) {
+              else if (vm.data.kfjh[i].type == 2) {
+
+                var flag = false;
+                var j
+                for (j in temp) {
+                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
+                    temp[j].title.push(vm.data.kfjh[i].name);
+                    flag = true;
+                  }
+                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
+                    temp[j].title.push(vm.data.kfjh[i].name);
+                    flag = true;
+                  }
+                }
+                if (!flag) {
+                  temp.push({
+                    time_stamp: vm.data.kfjh[i].unix_timestamp_set,
+                    title: [vm.data.kfjh[i].name],
+                    time: vm.data.kfjh[i].setDate
+                  })
+                };
+                continue;
+              }
+
+              if (temp.length == 0) {
                 temp.push({
                   time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                  title: [vm.data.kfjh[i].desc + "开始"],
+                  title: [vm.data.kfjh[i].name + "开始"],
                   time: vm.data.kfjh[i].startDate
-                })
-              };
-              if (!flagE) {
-                temp.push({
-                  time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                  title: [vm.data.kfjh[i].desc + "结束"],
-                  time: vm.data.kfjh[i].endDate
-                })
+                }, {
+                    time_stamp: vm.data.kfjh[i].unix_timestamp_e,
+                    title: [vm.data.kfjh[i].name + "结束"],
+                    time: vm.data.kfjh[i].endDate
+                  }
+                )
+              }
+              else {
+                var flagS = false;
+                var flagE = false;
+                var j
+                for (j in temp) {
+                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
+                    temp[j].title.push(vm.data.kfjh[i].name + "开始");
+                    flagS = true;
+                  }
+                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
+                    temp[j].title.push(vm.data.kfjh[i].name + "结束");
+                    flagE = true;
+                  }
+                }
+                if (!flagS) {
+                  temp.push({
+                    time_stamp: vm.data.kfjh[i].unix_timestamp_s,
+                    title: [vm.data.kfjh[i].name + "开始"],
+                    time: vm.data.kfjh[i].startDate
+                  })
+                };
+                if (!flagE) {
+                  temp.push({
+                    time_stamp: vm.data.kfjh[i].unix_timestamp_e,
+                    title: [vm.data.kfjh[i].name + "结束"],
+                    time: vm.data.kfjh[i].endDate
+                  })
+                }
               }
             }
-          }
-          temp = temp.sort(compare('time_stamp'))
-          //只留下部分计划（3个）
-          temp = temp.slice(0, 3);
+            temp = temp.sort(compare('time_stamp'))
+            console.log("time_axis:", temp)
+            //只留下部分计划（3个）
+            temp = temp.slice(0, 3);
+            
+            vm.setData({
+              time_axis: temp
+            })
+
+            //以下为生成今日任务
+            util.getUserZXJHByDate(function (resData) {
+              vm.setData({
+                task_today: resData.data.ret
+              })
+              console.log(resData.data.ret)
+            }, null)
+          }, null)
+
+        }
+        else {
+          //游客模式
+        }
 
 
-          vm.setData({
-            time_axis: temp
-          })
-
-          //以下为生成今日任务
-          // var task_t=[];
-          // if
-          // {
-          //   type: "kfjh",
-          //     name: "踝泵练习",
-          //       desc: "踝关节缓慢、有力、全范围的屈伸活动，每日500次以上。",
-          //         xj_ids: ["0001", "0004"],
-          //           status: '0',
-          //             info_id: "0001"
-          // }
-        }, null)
-
-      }
-      else{
-        //游客模式
-      }
-      
-
-    }, null)
+      }, null)
     console.log(vm.data.time_axis)
     util.getADs(function (resAD) {
       console.log("getADs:xxxxxxxxxx", resAD.data.ret)
@@ -271,7 +295,7 @@ Page({
     wx.switchTab({
       url: '../textlist/textlist?ids=' + e.currentTarget.id,
       success: function (res) { },
-      fail: function (res) { console.log("调用失败",res)},
+      fail: function (res) { console.log("调用失败", res) },
       complete: function (res) { },
     })
   },
@@ -288,7 +312,7 @@ Page({
       url: '/pages/textlist/textlist',
     })
   },
-  cjsj:function(){
+  cjsj: function () {
     wx.navigateTo({
       url: "/pages/cjsj/cjsj",
       success: function (res) { },
@@ -296,5 +320,5 @@ Page({
       complete: function (res) { },
     })
   }
-  
+
 })

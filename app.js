@@ -13,6 +13,13 @@ App({
     if (!util.judgeIsAnyNullStr(userInfo)) {
       vm.globalData.userInfo = wx.getStorageSync("userInfo");
       console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
+      var now=new Date().getTime();
+      var StorageTime = wx.getStorageSync("userInfo").StorageTime;
+      console.log("缓存时间:", now - StorageTime)
+      if (now-StorageTime>86400000){
+        //调用登录接口
+        vm.login(null);
+      }
     } else {
       //调用登录接口
       vm.login(null);
@@ -47,7 +54,7 @@ App({
       console.log("login:" + JSON.stringify(ret))
       //如果登录成功，跳转到首页
       if (ret.data.result) {
-        vm.globalData.user=ret.data.ret;
+        vm.globalData.user = ret.data.ret;
         vm.storeUserInfo(ret.data.ret)
         console.log("登录成功", vm.globalData.user)
       } else {
@@ -63,7 +70,8 @@ App({
   //向globalData中存储数据
   storeUserInfo: function (obj) {
     if (util.judgeIsAnyNullStr(obj.token))
-    obj.token = vm.globalData.userInfo.token;
+      obj.token = vm.globalData.userInfo.token;
+    obj.StorageTime=new Date().getTime();
     console.log("storeUserInfo :" + JSON.stringify(obj))
     wx.setStorage({
       key: "userInfo",

@@ -61,14 +61,16 @@ Page({
         util.getKFJHByUserId({ id: uid }, function (res) {
           var kfjh = [];
           for (var x in res.data.ret) {
-            var start = formatTime(res.data.ret[x].start_time)
-            var end = formatTime(res.data.ret[x].end_time)
+
             kfjh.push({
+              type: res.data.ret[x].btime_type,
               name: res.data.ret[x].name,
-              startDate: start,
-              endDate: end,
-              unix_timestamp_s: res.data.ret[x].start_time,
-              unix_timestamp_e: res.data.ret[x].end_time,
+              startDate: res.data.ret[x].start_date,
+              endDate: res.data.ret[x].end_date,
+              setDate: res.data.ret[x].set_date,
+              unix_timestamp_set: res.data.ret[x].set_date_time_stamp,
+              unix_timestamp_s: res.data.ret[x].start_time_stamp,
+              unix_timestamp_e: res.data.ret[x].end_time_stamp,
             })
           }
           vm.setData({
@@ -77,20 +79,50 @@ Page({
           })
           console.log("康复计划",kfjh)
           //以下为将康复计划转化为时间轴
-
-
           var temp = []
 
           var i;
           for (i in vm.data.kfjh) {
+            if (vm.data.kfjh[i].type == 2 && temp.length == 0) {
+              temp.push({
+                time_stamp: vm.data.kfjh[i].unix_timestamp_set,
+                title: [vm.data.kfjh[i].name],
+                time: vm.data.kfjh[i].setDate
+              })
+              continue;
+            }
+            else if (vm.data.kfjh[i].type == 2) {
+
+              var flag = false;
+              var j
+              for (j in temp) {
+                if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
+                  temp[j].title.push(vm.data.kfjh[i].name);
+                  flag = true;
+                }
+                if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
+                  temp[j].title.push(vm.data.kfjh[i].name);
+                  flag = true;
+                }
+              }
+              if (!flag) {
+                temp.push({
+                  time_stamp: vm.data.kfjh[i].unix_timestamp_set,
+                  title: [vm.data.kfjh[i].name],
+                  time: vm.data.kfjh[i].setDate
+                })
+              };
+              continue;
+            }
+
             if (temp.length == 0) {
               temp.push({
                 time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                title: [vm.data.kfjh[i].name + "开始"],
+                title: [vm.data.kfjh[i].name + "  开始"],
                 time: vm.data.kfjh[i].startDate
               }, {
                   time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                  title: [vm.data.kfjh[i].name + "结束"],
+                  title: [vm.data.kfjh[i].name + "  结束"],
                   time: vm.data.kfjh[i].endDate
                 }
               )
@@ -101,50 +133,39 @@ Page({
               var j
               for (j in temp) {
                 if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
-                  temp[j].title.push(vm.data.kfjh[i].name + "开始");
+                  temp[j].title.push(vm.data.kfjh[i].name + "  开始");
                   flagS = true;
                 }
                 if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
-                  temp[j].title.push(vm.data.kfjh[i].name + "结束");
+                  temp[j].title.push(vm.data.kfjh[i].name + "  结束");
                   flagE = true;
                 }
               }
               if (!flagS) {
                 temp.push({
                   time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                  title: [vm.data.kfjh[i].name + "开始"],
+                  title: [vm.data.kfjh[i].name + "  开始"],
                   time: vm.data.kfjh[i].startDate
                 })
               };
               if (!flagE) {
                 temp.push({
                   time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                  title: [vm.data.kfjh[i].name + "结束"],
+                  title: [vm.data.kfjh[i].name + "  结束"],
                   time: vm.data.kfjh[i].endDate
                 })
               }
             }
           }
           temp = temp.sort(compare('time_stamp'))
-          //只留下部分计划（3个）
-          temp = temp.slice(0, 3);
-
+          console.log("time_axis:", temp)
 
           vm.setData({
             time_axis: temp
           })
 
           //以下为生成今日任务
-          // var task_t=[];
-          // if
-          // {
-          //   type: "kfjh",
-          //     name: "踝泵练习",
-          //       name: "踝关节缓慢、有力、全范围的屈伸活动，每日500次以上。",
-          //         xj_ids: ["0001", "0004"],
-          //           status: '0',
-          //             info_id: "0001"
-          // }
+          
         }, null)
 
       }

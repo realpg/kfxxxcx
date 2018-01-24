@@ -50,7 +50,7 @@ Page({
     },null)
     //从服务器获取资讯类型列表
     util.getArticleTypeList(function(res){
-      var typelist = res.data.ret.data
+      var typelist = res.data.ret
       console.log("typelist=", typelist)
       typelist.unshift({
         id: "", name: "全部", desc:"全部"
@@ -174,7 +174,7 @@ Page({
   chooseType:function(e){
     console.log(e.currentTarget.id.substr(4))
     //从服务器获取资讯列表
-    util.getArticleList({ type: e.currentTarget.id.substr(4)}, function (res) {
+    util.getArticleList({ hpos_ids: e.currentTarget.id.substr(4)}, function (res) {
       console.log("res:", res.data.ret.data);
       var text = [];
       for (var x in res.data.ret.data) {

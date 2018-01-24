@@ -16,15 +16,14 @@
           <view class="weui-cell__ft" style="width:500rpx">{{item.lb.name}}</view>
         </view>
         <view class="weui-cell">
+          <view class="weui-cell__bd">状态: </view>
+          <view class="weui-cell__ft" style="width:500rpx"> {{item.status == 1?"已评分":"待评分"}}</view>
+        </view>
+        <view class="weui-cell">
           <view class="weui-cell__bd">分数: </view>
           <view class="weui-cell__ft" style="width:500rpx"> {{item.score}}</view>
         </view>
-        <view class="weui-cells weui-cells_after-title">
-          <navigator url="./detail/detail?result={{item.result}}&lb_id={{item.lb_id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-            <view class="weui-cell__bd">您的回答: </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </navigator>
-        </view>
+      
       </view>
     </view>
   </view>
