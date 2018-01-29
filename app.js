@@ -6,6 +6,9 @@ const util = require('/utils/util.js')
 App({
   onLaunch: function () {
     vm = this
+  },
+  //判断
+  appOnReady: function () {
     //获取用户缓存数据
     var userInfo = wx.getStorageSync("userInfo");
     console.log("local storage userInfo:" + JSON.stringify(userInfo), !util.judgeIsAnyNullStr(userInfo));
@@ -13,10 +16,10 @@ App({
     if (!util.judgeIsAnyNullStr(userInfo)) {
       vm.globalData.userInfo = wx.getStorageSync("userInfo");
       console.log("vm.globalData.userInfo:" + JSON.stringify(vm.globalData.userInfo));
-      var now=new Date().getTime();
+      var now = new Date().getTime();
       var StorageTime = wx.getStorageSync("userInfo").StorageTime;
       console.log("缓存时间:", now - StorageTime)
-      if (now-StorageTime>86400000){
+      if (now - StorageTime > 86400000) {
         //调用登录接口
         vm.login(null);
       }
@@ -71,7 +74,7 @@ App({
   storeUserInfo: function (obj) {
     if (util.judgeIsAnyNullStr(obj.token))
       obj.token = vm.globalData.userInfo.token;
-    obj.StorageTime=new Date().getTime();
+    obj.StorageTime = new Date().getTime();
     console.log("storeUserInfo :" + JSON.stringify(obj))
     wx.setStorage({
       key: "userInfo",

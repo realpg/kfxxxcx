@@ -104,3 +104,11 @@
 .weui-panel__hd:after{
   border-bottom: none;
 }
+.cjsj{
+  font-size: 50rpx;
+  width: 150rpx;
+  height: 150rpx;
+  left: 325rpx;
+  background-color: green;
+  color: white;
+}

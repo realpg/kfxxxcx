@@ -143,9 +143,22 @@ function getUserZXJHByDate(successCallback, errorCallback){
 }
 //通过id获取计划数据
 function getKFSJByUserId(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/api/kfjh/getKFSJByUserId', param, "GET", successCallback, errorCallback);
+  wxRequest(SERVER_URL + '/api/cjsj/getCJSJsByUserId', param, "GET", successCallback, errorCallback);
+}
+//获取患处
+function getHposList(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/hPos/getList', {}, "GET", successCallback, errorCallback);
 }
 
+//根据患处id获取数据项列表
+function getListByHPosId(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/sjx/getListByHPosId', param, "GET", successCallback, errorCallback);
+}
+
+//上报采集数据
+function reportCJSJ(param, successCallback, errorCallback) {
+  wxRequest(SERVER_URL + '/api/cjsj/reportCJSJ', param, "POST", successCallback, errorCallback);
+}
 
 const formatNumber = n => {
   n = n.toString()
@@ -546,6 +559,10 @@ module.exports = {
   getBLByUserId: getBLByUserId,
   getKFJHByUserId: getKFJHByUserId,
   getUserZXJHByDate: getUserZXJHByDate,
+  getKFSJByUserId: getKFSJByUserId,
+  getHposList: getHposList,
+  getListByHPosId:getListByHPosId,
+  reportCJSJ:reportCJSJ,
 
   formatTime: formatTime,
   formatDate: formatDate,

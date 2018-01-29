@@ -46,7 +46,7 @@
       },
       {
         "pagePath": "pages/textlist/textlist",
-        "text": "资讯",
+        "text": "宣教",
         "iconPath": "icons/text.png",
         "selectedIconPath": "icons/text-s.png",
         "selectedColor": "#1aad19"

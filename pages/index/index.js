@@ -70,149 +70,142 @@ Page({
           }]
         })
       }
+    app.appOnReady();
 
     //获取用户信息
     console.log("index:onload", JSON.stringify(app.globalData.userInfo))
     vm.reLoad(app.globalData.userInfo);
   },
   reLoad: function (user) {
-    if (user)
-      util.getUserInfo(user, function (res1) {
-        console.log('res1', res1)
-        if (res1.data.result) {
-          console.log("user_res:", res1)
-
-          var user = res1.data.ret;
-          user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
-          user.birthday = user.birthday.substr(0, 10);
-          app.storeUserInfo(user);
+    if (user) {
+      var user = app.globalData.userInfo;
+      user.gender = user.gender == '2' ? "女性" : (user.gender == '1' ? "男性" : "保密");
+      user.birthday = user.birthday.substr(0, 10);
+      app.storeUserInfo(user);
 
 
 
-          // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
-          var uid = app.globalData.userInfo.id;
-          util.getKFJHByUserId({ id: uid }, function (res) {
-            var kfjh = [];
-            for (var x in res.data.ret) {
-              
-              kfjh.push({
-                type: res.data.ret[x].btime_type,
-                name: res.data.ret[x].name,
-                startDate: res.data.ret[x].start_date,
-                endDate: res.data.ret[x].end_date,
-                setDate: res.data.ret[x].set_date,
-                unix_timestamp_set: res.data.ret[x].set_date_time_stamp,
-                unix_timestamp_s: res.data.ret[x].start_time_stamp,
-                unix_timestamp_e: res.data.ret[x].end_time_stamp,
-              })
-            }
-            vm.setData({
-              'kfjh': kfjh
+      // 在这里获取数据，包括：康复计划，首页轮播图，宣教信息
+      var uid = app.globalData.userInfo.id;
+      util.getKFJHByUserId({ id: uid }, function (res) {
+        var kfjh = [];
+        for (var x in res.data.ret) {
+
+          kfjh.push({
+            type: res.data.ret[x].btime_type,
+            name: res.data.ret[x].name,
+            startDate: res.data.ret[x].start_date,
+            endDate: res.data.ret[x].end_date,
+            setDate: res.data.ret[x].set_date,
+            unix_timestamp_set: res.data.ret[x].set_date_time_stamp,
+            unix_timestamp_s: res.data.ret[x].start_time_stamp,
+            unix_timestamp_e: res.data.ret[x].end_time_stamp,
+          })
+        }
+        vm.setData({
+          'kfjh': kfjh
+        })
+        //以下为将康复计划转化为时间轴
+        var temp = []
+
+        var i;
+        for (i in vm.data.kfjh) {
+          if (vm.data.kfjh[i].type == 2 && temp.length == 0) {
+            temp.push({
+              time_stamp: vm.data.kfjh[i].unix_timestamp_set,
+              title: [vm.data.kfjh[i].name],
+              time: vm.data.kfjh[i].setDate
             })
-            //以下为将康复计划转化为时间轴
-            var temp = []
+            continue;
+          }
+          else if (vm.data.kfjh[i].type == 2) {
 
-            var i;
-            for (i in vm.data.kfjh) {
-              if (vm.data.kfjh[i].type == 2 && temp.length == 0) {
-                temp.push({
-                  time_stamp: vm.data.kfjh[i].unix_timestamp_set,
-                  title: [vm.data.kfjh[i].name],
-                  time: vm.data.kfjh[i].setDate
-                })
-                continue;
+            var flag = false;
+            var j
+            for (j in temp) {
+              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
+                temp[j].title.push(vm.data.kfjh[i].name);
+                flag = true;
               }
-              else if (vm.data.kfjh[i].type == 2) {
-
-                var flag = false;
-                var j
-                for (j in temp) {
-                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
-                    temp[j].title.push(vm.data.kfjh[i].name);
-                    flag = true;
-                  }
-                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
-                    temp[j].title.push(vm.data.kfjh[i].name);
-                    flag = true;
-                  }
-                }
-                if (!flag) {
-                  temp.push({
-                    time_stamp: vm.data.kfjh[i].unix_timestamp_set,
-                    title: [vm.data.kfjh[i].name],
-                    time: vm.data.kfjh[i].setDate
-                  })
-                };
-                continue;
-              }
-
-              if (temp.length == 0) {
-                temp.push({
-                  time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                  title: [vm.data.kfjh[i].name + "开始"],
-                  time: vm.data.kfjh[i].startDate
-                }, {
-                    time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                    title: [vm.data.kfjh[i].name + "结束"],
-                    time: vm.data.kfjh[i].endDate
-                  }
-                )
-              }
-              else {
-                var flagS = false;
-                var flagE = false;
-                var j
-                for (j in temp) {
-                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
-                    temp[j].title.push(vm.data.kfjh[i].name + "开始");
-                    flagS = true;
-                  }
-                  if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
-                    temp[j].title.push(vm.data.kfjh[i].name + "结束");
-                    flagE = true;
-                  }
-                }
-                if (!flagS) {
-                  temp.push({
-                    time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                    title: [vm.data.kfjh[i].name + "开始"],
-                    time: vm.data.kfjh[i].startDate
-                  })
-                };
-                if (!flagE) {
-                  temp.push({
-                    time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                    title: [vm.data.kfjh[i].name + "结束"],
-                    time: vm.data.kfjh[i].endDate
-                  })
-                }
+              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
+                temp[j].title.push(vm.data.kfjh[i].name);
+                flag = true;
               }
             }
-            temp = temp.sort(compare('time_stamp'))
-            console.log("time_axis:", temp)
-            //只留下部分计划（3个）
-            temp = temp.slice(0, 3);
-            
-            vm.setData({
-              time_axis: temp
-            })
-
-            //以下为生成今日任务
-            util.getUserZXJHByDate(function (resData) {
-              vm.setData({
-                task_today: resData.data.ret
+            if (!flag) {
+              temp.push({
+                time_stamp: vm.data.kfjh[i].unix_timestamp_set,
+                title: [vm.data.kfjh[i].name],
+                time: vm.data.kfjh[i].setDate
               })
-              console.log(resData.data.ret)
-            }, null)
-          }, null)
+            };
+            continue;
+          }
 
+          if (temp.length == 0) {
+            temp.push({
+              time_stamp: vm.data.kfjh[i].unix_timestamp_s,
+              title: [vm.data.kfjh[i].name + "开始"],
+              time: vm.data.kfjh[i].startDate
+            }, {
+                time_stamp: vm.data.kfjh[i].unix_timestamp_e,
+                title: [vm.data.kfjh[i].name + "结束"],
+                time: vm.data.kfjh[i].endDate
+              }
+            )
+          }
+          else {
+            var flagS = false;
+            var flagE = false;
+            var j
+            for (j in temp) {
+              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
+                temp[j].title.push(vm.data.kfjh[i].name + "开始");
+                flagS = true;
+              }
+              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
+                temp[j].title.push(vm.data.kfjh[i].name + "结束");
+                flagE = true;
+              }
+            }
+            if (!flagS) {
+              temp.push({
+                time_stamp: vm.data.kfjh[i].unix_timestamp_s,
+                title: [vm.data.kfjh[i].name + "开始"],
+                time: vm.data.kfjh[i].startDate
+              })
+            };
+            if (!flagE) {
+              temp.push({
+                time_stamp: vm.data.kfjh[i].unix_timestamp_e,
+                title: [vm.data.kfjh[i].name + "结束"],
+                time: vm.data.kfjh[i].endDate
+              })
+            }
+          }
         }
-        else {
-          //游客模式
-        }
+        temp = temp.sort(compare('time_stamp'))
+        console.log("time_axis:", temp)
+        //只留下部分计划（3个）
+        temp = temp.slice(0, 3);
 
+        vm.setData({
+          time_axis: temp
+        })
 
+        //以下为生成今日任务
+        util.getUserZXJHByDate(function (resData) {
+          vm.setData({
+            task_today: resData.data.ret
+          })
+          console.log(resData.data.ret)
+        }, null)
       }, null)
+
+    }
+    else {
+      //游客模式
+    }
     console.log(vm.data.time_axis)
     util.getADs(function (resAD) {
       console.log("getADs:xxxxxxxxxx", resAD.data.ret)

@@ -20,6 +20,11 @@
               <image class="weui-article__img" src="{{item.img}}" mode="aspectFit" style="width:100%" />
             </view>
           </view>
+          <view class="weui-article__p">
+            <view wx:if="{{item.video}}" wx:key="key">
+              <video src='{{item.video}}'></video>
+            </view>
+          </view>
         </view>
 
       </view>

@@ -11,19 +11,23 @@
     <view wx:else>
       <view>{{positions[item.position].name}}</view>
       <view>数据项:</view>
-      <view wx:if="{{!item.sjx_id}}">
-        <picker id='sjx{{index}}' mode="selector" range='{{sjx}}' range-key="name" value="0" bindchange="chooseSjx">
+      <view wx:if="{{!item.sjx}}">
+        <picker id='sjx{{index}}' mode="selector" range='{{item.sjxs}}' range-key="name" value="0" bindchange="chooseSjx">
           请选择
         </picker>
       </view>
       <view wx:else>
         {{item.sjx.name}}
-
-        <view wx:if="{{positions[item.position].number>1}}">具体位置:{{item.position_d}}
-          <slider id='jtwz{{index}}' min="1" max="{{positions[item.position].number}}" value="{{item.position_d}}" bindchange='changePosition_d'></slider>
+        <view wx:if="{{item.sjx.is_dis_pos==1}}">具体位置:{{item.c_pos}}
+          <slider id='jtwz{{index}}' min="1" max="{{positions[item.position].number}}" value="{{item.c_pos}}" bindchange='changePosition_d'></slider>
           <view wx:for="{{positions[item.position].img_array}}" wx:for-item="imgUrl">
             <image src='{{imgUrl}}'></image>
           </view>
+        </view>
+        <view wx:if="{{item.sjx.is_dis_lr==1}}">患侧:
+          <!-- 患侧 -->
+          <picker id="side{{index}}"bindchange='changeSide' value="0" range='{{["左侧","右侧"]}}'>
+          {{item.c_side?(item.c_side=='r'?'右侧':'左侧'):"请选择"}}</picker>
         </view>
         <!-- 具体测量的内容 -->
         <view wx:if="{{item.sjx.side==0}}">
@@ -88,19 +92,19 @@
         <view wx:elif="{{item.sjx.side==1}}">双侧测量(请测量双侧对称位置)
           <view>左侧
             <!-- 皮温 -->
-          <view wx:if="{{item.sjx.type==1}}">
-            <view class="weui-cell">
-              <view class="weui-cell__bd">
-                <view wx:if='{{item.value[0]==0}}'>
-                  <button bindtap="GetPiwen" size="mini" id='{{index}}n' style='margin-left:30rpx'>测量</button>
-                </view>
-                <view wx:else>
-                  {{item.value[0]}}
-                  <button bindtap="GetPiwen" size="mini" id='{{index}}n' style='margin-left:30rpx'>重新测量</button>
+            <view wx:if="{{item.sjx.type==1}}">
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                  <view wx:if='{{item.value[0]==0}}'>
+                    <button bindtap="GetPiwen" size="mini" id='{{index}}n' style='margin-left:30rpx'>测量</button>
+                  </view>
+                  <view wx:else>
+                    {{item.value[0]}}
+                    <button bindtap="GetPiwen" size="mini" id='{{index}}n' style='margin-left:30rpx'>重新测量</button>
+                  </view>
                 </view>
               </view>
             </view>
-          </view>
             <!-- 皮疼 -->
             <view wx:if="{{item.sjx.type==2}}">
               <view class="weui-cell">
@@ -145,7 +149,20 @@
             </view>
           </view>
           <view>右侧
-            <view wx:if="{{item.sjx.type==1}}">皮温</view>
+            <!-- 皮温 -->
+            <view wx:if="{{item.sjx.type==1}}">
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                  <view wx:if='{{item.value[1]==0}}'>
+                    <button bindtap="GetPiwen" size="mini" id='{{index}}r' style='margin-left:30rpx'>测量</button>
+                  </view>
+                  <view wx:else>
+                    {{item.value[1]}}
+                    <button bindtap="GetPiwen" size="mini" id='{{index}}r' style='margin-left:30rpx'>重新测量</button>
+                  </view>
+                </view>
+              </view>
+            </view>
             <!-- 皮疼 -->
             <view wx:if="{{item.sjx.type==2}}">
               <view class="weui-cell">

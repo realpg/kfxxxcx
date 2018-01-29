@@ -1,5 +1,6 @@
 // pages/cjsj/cjsj.js
 var vm;
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -54,13 +55,21 @@ Page({
    */
   onLoad: function (options) {
     vm=this;
+    util.getHposList(null,function(res){
+      console.log(res.data)
+      if(res.data.result){
+        vm.setData({
+          positions:res.data.ret
+        })
+      }
+    },null)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -115,25 +124,29 @@ Page({
     })
   },
   choosePosition:function(e){
-    console.log('changePosition',vm.data.sj)
-    var index=e.target.id.substr(2);
-    var position = e.detail.value;
-    var sj=vm.data.sj;
-    sj[index].position=position;
-    sj[index].position_d=1;
-    
+    console.log('changePosition',e.detail.value,e)
+    var id=vm.data.positions[e.detail.value].id;
+    var index = e.target.id.substr(2);
+    var idx = e.detail.value;
+    var sj = vm.data.sj;
+    sj[index].position = e.detail.value;
+
     //根据位置获取数据项列表
-    vm.setData({
-      sj:sj
-    })
+    util.getListByHPosId({hpos_id:id},function(res){
+      console.log(res.data.ret);
+      sj[index].sjxs = res.data.ret
+      vm.setData({
+        sj:sj
+      })
+    },null)
   },
   chooseSjx: function (e) {
     var index = e.target.id.substr(3);
     var idx = e.detail.value;
     var sj = vm.data.sj;
     console.log('changeSjx',sj)
-    sj[index].sjx = vm.data.sjx[idx];
-    sj[index].sjx_id = vm.data.sjx[idx].id;
+    sj[index].sjx = sj[index].sjxs[idx];
+    sj[index].sjx_id = sj[index].sjxs[idx].id;
     sj[index].value = sj[index].sjx.side==0?[0]:[0, 0]; 
     //根据位置获取数据项列表
     vm.setData({
@@ -141,11 +154,23 @@ Page({
     })
   },
   changePosition_d:function(e){
-    console.log('changePosition_d',e);
+    
     var index = e.target.id.substr(4);
-    var position_d = e.detail.value;
+    var c_pos = e.detail.value;
     var sj = vm.data.sj;
-    sj[index].position_d = position_d;
+    sj[index].c_pos = c_pos;
+    console.log('changePosition_d', index,c_pos);
+    vm.setData({
+      sj: sj
+    })
+  },
+  changeSide:function(e){
+    var index = e.target.id.substr(4);
+    var array=["l","r"];
+    var c_side = array[e.detail.value];
+    var sj = vm.data.sj;
+    sj[index].c_side = c_side;
+    console.log('changePosition_d', index, c_side);
     vm.setData({
       sj: sj
     })
@@ -184,5 +209,29 @@ Page({
   },
   submit:function(){
     console.log("submit", JSON.stringify(vm.data.sj))
+    var param={
+      userCase_id:0,
+      cjsjs:vm.data.sj
+    }
+    util.reportCJSJ(param,function(res){
+      console.log(res)
+      if(res.data.result){
+        wx.showModal({
+          title: '提交成功',
+          content: '点击确定返回首页',
+          showCancel:false,
+          success:function(res){
+            if (res.confirm){
+              console.log(res)
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
+          }
+        })
+        
+      }
+      
+    },null)
   }
 })

@@ -19,39 +19,17 @@ Page({
     vm = this;
 
     //先从服务器获取历史数据
-    util.getKFSJByUserId({ id: app.globalData.user.id }, function (res) {
+    util.getKFSJByUserId({ id: app.globalData.userInfo.id }, function (res) {
       var history = [];
       if (res.data.result) {
         console.log(res.data.ret)
-        for (var x in res.data.ret) {
-          var date = res.data.ret[x].created_at.substr(0, 10);
-          if (history.length == 0) {
-            history.push({
-              date: date,
-              measure: [{ name: res.data.ret[x].sjx.name, value: res.data.ret[x].value }]
-            })
-          } else {
-            var flag = true;
-            for (var y in history) {
-              if (history[y].date == date) {
-                history[y].measure.push({ name: res.data.ret[x].sjx.name, value: res.data.ret[x].value })
-                flag = false;
-              }
-            }
-            if (flag) {
-              history.push({
-                date: date,
-                measure: [{ name: res.data.ret[x].sjx.name, value: res.data.ret[x].value }]
-              })
-            }
-          }
-        }
+        vm.setData({
+          history: res.data.ret.data
+        });
         console.log(history)
       }
       history = history.sort((a, b) => { return a > b ? -1 : 1 })
-      vm.setData({
-        history: history
-      });
+      
     }, null)
   },
 

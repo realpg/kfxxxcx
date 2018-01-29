@@ -78,6 +78,6 @@
     </view>
   </view>
 </view>
-<view bindtap='cjsj'>
+<view bindtap='cjsj' class='cjsj'>
   采集数据
 </view>
