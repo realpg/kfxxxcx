@@ -28,7 +28,7 @@ Page({
    */
   data: {
     kfjh: [],
-    kfjhExist: false    
+    kfjhExist: false
   },
 
   /**
@@ -36,7 +36,7 @@ Page({
    */
   onLoad: function (options) {
     vm = this;
-    var user=app.globalData.userInfo
+    var user = app.globalData.userInfo
 
     //以下为将康复计划转化为时间轴
     var now = new Date();
@@ -61,7 +61,6 @@ Page({
         util.getKFJHByUserId({ id: uid }, function (res) {
           var kfjh = [];
           for (var x in res.data.ret) {
-
             kfjh.push({
               type: res.data.ret[x].btime_type,
               name: res.data.ret[x].name,
@@ -75,9 +74,9 @@ Page({
           }
           vm.setData({
             'kfjh': kfjh,
-            kfjhExist:true
+            kfjhExist: true
           })
-          console.log("康复计划",kfjh)
+          console.log("康复计划", kfjh)
           //以下为将康复计划转化为时间轴
           var temp = []
 
@@ -165,7 +164,7 @@ Page({
           })
 
           //以下为生成今日任务
-          
+
         }, null)
 
       }
@@ -177,7 +176,7 @@ Page({
     }, null)
 
     console.log(vm.data.time_axis)
-    console.log("当前时间戳：", timestamp,"now:",now)
+    console.log("当前时间戳：", timestamp, "now:", now)
   },
 
   /**

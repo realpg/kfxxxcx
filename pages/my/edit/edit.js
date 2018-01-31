@@ -1,7 +1,21 @@
 // pages/my/edit/edit.js
-var vm;
-const util = require('../../../utils/util.js');
 const app = getApp();
+var vm;
+var context
+const util = require('../../../utils/util.js')
+const qiniuUploader = require("../../../utils/qiniuUploader");
+var token = ""
+
+var qnToken = ""
+// 初始化七牛相关参数
+function initQiniu() {
+  var options = {
+    region: 'ECN', // 华东区
+    uptoken: qnToken
+  };
+  console.log("initQiniu options:" + JSON.stringify(options))
+  qiniuUploader.init(options);
+}
 Page({
 
   /**
@@ -87,41 +101,67 @@ Page({
         if (res.confirm) {
           var user_data = e.detail.value;
           // util.getQiniuToken()
-          user_data.avatar = vm.data.tempAvatarPath//需要更改:应该先上传头像到服务器
+
+          var param = {}
+          //获取七牛上传token
+          util.getQiniuToken(param, function (res) {
+            console.log(JSON.stringify(res));
+            if (res.data.result) {
+              qnToken = res.data.ret;
+              console.log("qiniu upload token:" + qnToken)
+              initQiniu();
+              //获取token成功后上传图片
+              qiniuUploader.upload(vm.data.tempAvatarPath, (res) => {
+                console.log("qiniuUploader upload res:" + JSON.stringify(res));
+                var picture = util.getImgRealUrl(res.key)
+                vm.setData({
+                  files: picture
+                })
+                console.log("上传成功：" + JSON.stringify(vm.data.files))
+                wx.showToast({
+                  title: '上传成功',
+                })
+                user_data.avatar = vm.data.files//需要更改:应该先上传头像到服务器
 
 
-          var param = e.detail.value;
-          param.user_id = vm.data.user.id
-          param.token = vm.data.user.token
-          console.log("param:", param)
-          util.updateUserById(param, function (res1) {
-            console.log(res1.data)
-            if (res1.data.result) {
-              app.storeUserInfo(res1.data.ret)
-              wx.showModal({
-                title: '成功',
-                content: "上传成功！",
-                showCancel: false,
-                success: function (res2) {
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                }
-              })
-            }
-            else {
-              wx.showModal({
-                title: '失败',
-                content: res1.data.message,
-                showCancel: false,
-                success:function(res2){
-                  wx.navigateBack({
-                    delta:1
-                  })
-                }
+                var param = e.detail.value;
+                param.user_id = vm.data.user.id
+                param.token = vm.data.user.token
+                console.log("param:", param)
+                util.updateUserById(param, function (res1) {
+                  console.log(res1.data)
+                  if (res1.data.result) {
+                    app.storeUserInfo(res1.data.ret)
+                    wx.showModal({
+                      title: '成功',
+                      content: "上传成功！",
+                      showCancel: false,
+                      success: function (res2) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                      }
+                    })
+                  }
+                  else {
+                    wx.showModal({
+                      title: '失败',
+                      content: res1.data.message,
+                      showCancel: false,
+                      success: function (res2) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                      }
+                    })
+                  }
+                })
+              }, (error) => {
+                console.error('error: ' + JSON.stringify(error));
               })
             }
           })
+          
         }
       }
     })

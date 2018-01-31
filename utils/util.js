@@ -43,7 +43,10 @@ function wxRequest(url, param, method, successCallback, errorCallback) {
 
 //获取七牛token
 function getQiniuToken(param, successCallback, errorCallback) {
-  wxRequest(SERVER_URL + '/api/user/getQiniuToken', param, "POST", successCallback, errorCallback);
+  wxRequest(SERVER_URL + '/api/user/getQiniuToken', param, "GET", successCallback, errorCallback);
+}
+function getImgRealUrl(key_v) {
+  return "http://dsyy.isart.me/" + key_v;
 }
 
 //获取用户的OpenId
@@ -563,6 +566,7 @@ module.exports = {
   getHposList: getHposList,
   getListByHPosId:getListByHPosId,
   reportCJSJ:reportCJSJ,
+  getImgRealUrl: getImgRealUrl,
 
   formatTime: formatTime,
   formatDate: formatDate,

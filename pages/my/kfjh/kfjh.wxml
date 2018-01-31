@@ -20,8 +20,8 @@
         <view class="cd-timeline-content">
           <view class='h2'>{{item.time}}</view>
           <view class='p'>
-            <!-- <view wx:for='{{item.title}}' wx:key="key1" wx:for-item='t'>{{t}}</view> -->
-            {{item.title}}
+             <view wx:for='{{item.title}}' wx:key="key1" wx:for-item='t'>{{t}}</view> 
+            <!-- {{item.title}} -->
           </view>
           <!-- <view class='a' href="#" class="cd-read-more">阅读更多</view> -->
         </view>

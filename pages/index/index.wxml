@@ -32,7 +32,8 @@
           <view class="weui-media-box__info__meta">时间</view>
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view> -->
             <block>
-              <button class="weui-media-box__info__meta btn" size='mini' bindtap="getInfo" id="{{item.xj_ids}}">相关资讯</button>
+              {{item.xj_ids}}
+              <button class="weui-media-box__info__meta btn" size='mini' bindtap="getInfo" id="{{item.xj_ids}}" wx:if="{{item.xj_ids!=0}}">相关资讯</button>
             </block>
           </view>
         </view>

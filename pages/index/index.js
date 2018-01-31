@@ -285,8 +285,8 @@ Page({
   },
   getInfo: function (e) {
     console.log(e);
-    wx.switchTab({
-      url: '../textlist/textlist?ids=' + e.currentTarget.id,
+    wx.navigateTo({
+      url: '../textlist/article/article?id=' + e.currentTarget.id,
       success: function (res) { },
       fail: function (res) { console.log("调用失败", res) },
       complete: function (res) { },
