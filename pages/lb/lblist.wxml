@@ -1,0 +1,29 @@
+<view class='page'>
+  <view class='session'>
+    <view class="weui-panel__hd">
+      <image class="icon_for_session"style="width:36rpx;height:36rpx;" src='../../icons/lb_desc.png'></image>
+      说明
+    </view>
+    <view class='text'style="padding:26rpx 30rpx;"> 第一次参与的受试者填写量表的时间不受任何时间限制，即无论是健康人、术前或术后的病人，均可以在任何时间参与到量表的填写；因数据有效期为4-8天，所以一旦参加到量表填写的受试者，填写完第一次的八天后，若受试者仍未能完成量表的填写，则数据失效；若八天过后，受试者者未能在规定时间内及时完成第二次的量表填写，则八天以后的再次填写算第一次填写</view>
+  </view>
+
+  <view class='session'>
+    <view class="weui-panel__hd">
+      <image class="icon_for_session" src='../../icons/lb_list.png'></image>
+      测试试题库
+    </view>
+
+    <view class="weui-cells weui-cells_after-title" style='margin-top:10rpx;'>
+      <view wx:for="{{name}}" bindtap='startTest' class='cell weui-flex' style='flex-direction:row'>
+        <view class="cz_center " style=' display: table;'>
+          <view id='{{index}}' class='cell_bd'>{{item}}</view>
+        </view>
+        <view class="cz_center weui-flex__item" style='float:right; text-align:right; display: table;'>
+          <view class="cell_ft " wx:if="{{types[index]==0}}" style="color:gray">普通量表  </view>
+          <view class="cell_ft " wx:elif="{{types[index]==1}}" style="color:green">验证量表  </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

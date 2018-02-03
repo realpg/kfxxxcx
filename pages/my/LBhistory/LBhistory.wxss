@@ -1,0 +1,8 @@
+/* pages/my/LBhistory/LBhistory.wxss */
+.page__hd{
+  margin-top: 31rpx;
+  background-color: white;
+  font-size:34rpx;
+  text-align:center;
+  height: 88rpx;
+}

@@ -109,82 +109,23 @@ Page({
         var temp = []
 
         var i;
+        var date1 = new Date();
+        var now = Math.round(date1.getTime() / 1000)
+        console.log("现在时间", Math.round(date1.getTime() / 1000) + 604800, now + 604800, date1,vm.data.kfjh)
+        
+
         for (i in vm.data.kfjh) {
-          if (vm.data.kfjh[i].type == 2 && temp.length == 0) {
-            temp.push({
-              time_stamp: vm.data.kfjh[i].unix_timestamp_set,
-              title: [vm.data.kfjh[i].name],
-              time: vm.data.kfjh[i].setDate
-            })
-            continue;
-          }
-          else if (vm.data.kfjh[i].type == 2) {
-
-            var flag = false;
-            var j
-            for (j in temp) {
-              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
-                temp[j].title.push(vm.data.kfjh[i].name);
-                flag = true;
-              }
-              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
-                temp[j].title.push(vm.data.kfjh[i].name);
-                flag = true;
-              }
-            }
-            if (!flag) {
-              temp.push({
-                time_stamp: vm.data.kfjh[i].unix_timestamp_set,
-                title: [vm.data.kfjh[i].name],
-                time: vm.data.kfjh[i].setDate
-              })
-            };
-            continue;
-          }
-
-          if (temp.length == 0) {
-            temp.push({
-              time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-              title: [vm.data.kfjh[i].name + "开始"],
-              time: vm.data.kfjh[i].startDate
-            }, {
-                time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                title: [vm.data.kfjh[i].name + "结束"],
-                time: vm.data.kfjh[i].endDate
-              }
-            )
-          }
-          else {
-            var flagS = false;
-            var flagE = false;
-            var j
-            for (j in temp) {
-              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_s) {
-                temp[j].title.push(vm.data.kfjh[i].name + "开始");
-                flagS = true;
-              }
-              if (temp[j].time_stamp == vm.data.kfjh[i].unix_timestamp_e) {
-                temp[j].title.push(vm.data.kfjh[i].name + "结束");
-                flagE = true;
-              }
-            }
-            if (!flagS) {
-              temp.push({
-                time_stamp: vm.data.kfjh[i].unix_timestamp_s,
-                title: [vm.data.kfjh[i].name + "开始"],
-                time: vm.data.kfjh[i].startDate
-              })
-            };
-            if (!flagE) {
-              temp.push({
-                time_stamp: vm.data.kfjh[i].unix_timestamp_e,
-                title: [vm.data.kfjh[i].name + "结束"],
-                time: vm.data.kfjh[i].endDate
-              })
-            }
-          }
+          if (vm.data.kfjh[i].unix_timestamp_s >= now && vm.data.kfjh[i].unix_timestamp_s <= (now + 604800))
+          {temp.push(vm.data.kfjh[i]);continue}
+          if (vm.data.kfjh[i].unix_timestamp_set >= now && vm.data.kfjh[i].unix_timestamp_set <= (now + 604800))
+            {temp.push(vm.data.kfjh[i]);continue}
+          if (vm.data.kfjh[i].unix_timestamp_s <= now && vm.data.kfjh[i].unix_timestamp_e >= now )
+            {temp.push(vm.data.kfjh[i]);continue}
+          if (vm.data.kfjh[i].unix_timestamp_s <= (now + 604800) && vm.data.kfjh[i].unix_timestamp_e >= (now + 604800))
+            {temp.push(vm.data.kfjh[i]);continue}
         }
         temp = temp.sort(compare('time_stamp'))
+        
         console.log("time_axis:", temp)
         //只留下部分计划（3个）
         temp = temp.slice(0, 3);
@@ -231,12 +172,7 @@ Page({
    */
   onShow: function () {
     var date1 = new Date();
-    date1.setHours(0)
-    date1.setMinutes(0)
-    date1.setSeconds(0)
-    date1.setMilliseconds(0)
-    date1.setFullYear(2018, 0, 7)
-    console.log(Math.round(date1.getTime() / 1000), date1)
+    console.log("现在时间",Math.round(date1.getTime() / 1000), date1)
   },
 
   /**
@@ -280,13 +216,13 @@ Page({
   },
   jumpToCjsj: function () {
     wx.navigateTo({
-      url: 'cjsj/cjsj',
+      url: './cjsj/cjsj',
     })
   },
   getInfo: function (e) {
     console.log(e);
     wx.navigateTo({
-      url: '../textlist/article/article?id=' + e.currentTarget.id,
+      url: '../xj/article/article?id=' + e.currentTarget.id,
       success: function (res) { },
       fail: function (res) { console.log("调用失败", res) },
       complete: function (res) { },
@@ -302,12 +238,12 @@ Page({
   },
   toTextList: function () {
     wx.switchTab({
-      url: '/pages/textlist/textlist',
+      url: '/pages/xj/xj',
     })
   },
   cjsj: function () {
     wx.navigateTo({
-      url: "/pages/cjsj/cjsj",
+      url: "/pages/index/cjsj/cjsj",
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

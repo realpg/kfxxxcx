@@ -19,7 +19,7 @@ App({
       var now = new Date().getTime();
       var StorageTime = wx.getStorageSync("userInfo").StorageTime;
       console.log("缓存时间:", now - StorageTime)
-      if (now - StorageTime > 86400000) {
+      if (now - StorageTime > 3600) {
         //调用登录接口
         vm.login(null);
       }

@@ -1,15 +1,15 @@
+.slide-image{
+  width: 750rpx;
+  height: 350rpx;
+}
 .session {
   color: black;
-  border: 2px solid black;
-  margin: 20rpx 20rpx 40rpx 20rpx;
-  padding: 40rpx 40rpx;
-  border-radius: 5px;
-  background-color: white
+  background-color: white;
 }
 
 .sessionIcon {
-  width: 60rpx;
-  height: 60rpx;
+  width: 68rpx;
+  height: 68rpx;
 }
 
 .sessionTitle {
@@ -18,9 +18,11 @@
   margin-top: -70rpx;
   margin-left: 70rpx;
   margin-bottom: 60rpx;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1rpx solid #ccc;
 }
-
+.last_noboredr:nth-last-child(1){
+  border: none
+}
 .task {
   border-bottom: 2px solid #ccc;
   margin: 50rpx 0rpx;
@@ -28,7 +30,7 @@
 
 .taskName {
   color: black;
-  font-size:48rpx;
+  font-size: 48rpx;
   margin-top: -60rpx;
   margin-left: 60rpx;
 }
@@ -48,14 +50,15 @@
   width: 210rpx;
   height: 210rpx;
 }
+
 .kp_title {
   color: black;
-  
   margin-top: -180rpx;
   margin-left: 240rpx;
-  font-size:46rpx; 
+  font-size: 46rpx;
 }
-.kp_tag{
+
+.kp_tag {
   color: black;
   text-align: center;
   width: 210rpx;
@@ -66,49 +69,154 @@
   border: 2px solid blue;
   border-radius: 2px;
 }
-.weui-panel__hd{
-  font-size: 15px;
+.title_ft{
+  font-size: 24rpx;
+  line-height: 24rpx;
+  position: absolute;
+  right: 50rpx;
+  top:50%;
+  margin-top: -16rpx;
 }
-.btn{
-  color: black;
+
+.weui-panel__hd {
+  font-size: 34rpx;
+  padding-left: 26rpx;
+  padding-bottom: 28rpx;
+  padding-top: 22rpx;
+  color: #333;
+  
+  font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
 }
-.noBorder{
-  border-radius:0px;
+.weui-panel__bd::after{
+  border-bottom: #ddd solid 1rpx;
+  bottom: 0;
+}
+
+.weui-panel__bd {
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  margin-top: 44rpx;
+  margin-bottom: 44rpx;
+  height: 225rpx;
+  font-family: "Microsoft YaHei";
+}
+
+.box_title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 30rpx;
+}
+
+.box_desc {
+  position: absolute;
+  left: 0;
+  top: 68rpx;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  width: 460rpx;
+  overflow: scroll;
+  -webkit-line-clamp: 3;
+  color: #999999;
+  margin-top: 20rpx;
+}
+
+.box_btn {
+  position: absolute;
+  right: 0;
+  top: 68rpx;
+  color: #1aad19;
+  border: 1rpx solid #1aad19;
+  background-color: white;
+}
+
+.cell_box {
+  height: 128rpx;
+  margin: 26rpx 36rpx;
+  border-bottom: 1rpx solid #ddd;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
+}
+.icon_for_session{
+  width: 34rpx;
+  height: 34rpx;
+  display: float;
+  position: relative;
+  top:4rpx;
+}
+
+.cell_box_title {
+  position: absolute;
+  left: 0;
+  top: 0rpx;
+  font-size: 30rpx;
+}
+
+.cell_box_desc {
+  position: absolute;
+  left: 0;
+  bottom: 0rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  width: 460rpx;
+}
+
+.noBorder {
+  border-radius: 0px;
 }
 
 .weui-cells:before {
   top: 0;
   border-top: none;
 }
+
 .weui-cells:after {
   bottom: 0;
   border-bottom: none;
 }
-.weui-panel{
-  padding-bottom: 10rpx
+.cell:nth-last-child(1){
+  border: none;
 }
-.weui-panel__hd{
-  color: black
+.weui-panel {
+  padding-bottom: 0rpx;
 }
-.weui-cell:before{
+.weui-cell:nth-last-child(1) {
+  border: none;
+}
+
+.weui-panel__hd {
+  color: black;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.weui-cell:before {
   border-top: none;
 }
+
 .weui-panel:after {
   bottom: 0;
   border-bottom: none;
 }
+
 .weui-panel:before {
   top: 0;
-  border-top:none;
+  border-top: none;
 }
-.weui-panel__hd:after{
+
+.weui-panel__hd:after {
   border-bottom: none;
 }
-.cjsj{
+
+.cjsj {
   font-size: 50rpx;
   width: 150rpx;
   height: 150rpx;
   left: 325rpx;
   background-color: green;
   color: white;
+}
+
+.weui-panel {
+  margin-top: 20rpx;
 }

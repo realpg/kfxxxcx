@@ -1,4 +1,3 @@
-// pages/my/edit/edit.js
 const app = getApp();
 var vm;
 var context
@@ -104,6 +103,7 @@ Page({
 
           var param = {}
           //获取七牛上传token
+          if (vm.data.tempAvatarPath != app.globalData.userInfo.avatar)
           util.getQiniuToken(param, function (res) {
             console.log(JSON.stringify(res));
             if (res.data.result) {
@@ -121,16 +121,16 @@ Page({
                 wx.showToast({
                   title: '上传成功',
                 })
-                user_data.avatar = vm.data.files//需要更改:应该先上传头像到服务器
-
 
                 var param = e.detail.value;
                 param.user_id = vm.data.user.id
                 param.token = vm.data.user.token
+                param.avatar = vm.data.files
                 console.log("param:", param)
                 util.updateUserById(param, function (res1) {
                   console.log(res1.data)
                   if (res1.data.result) {
+                    user_data = res1.data.ret;
                     app.storeUserInfo(res1.data.ret)
                     wx.showModal({
                       title: '成功',
@@ -161,7 +161,42 @@ Page({
               })
             }
           })
-          
+          else{
+            var param = e.detail.value;
+            param.user_id = vm.data.user.id
+            param.token = vm.data.user.token
+            console.log("param:", param)
+            util.updateUserById(param, function (res1) {
+              console.log(res1.data)
+              if (res1.data.result) {
+                user_data = res1.data.ret;
+                app.storeUserInfo(res1.data.ret)
+                wx.showModal({
+                  title: '成功',
+                  content: "上传成功！",
+                  showCancel: false,
+                  success: function (res2) {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }
+                })
+              }
+              else {
+                wx.showModal({
+                  title: '失败',
+                  content: res1.data.message,
+                  showCancel: false,
+                  success: function (res2) {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }
+                })
+              }
+            })
+          }
+
         }
       }
     })

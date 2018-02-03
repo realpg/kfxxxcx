@@ -1,0 +1,33 @@
+<!--pages/textlist/article/atricle.wxml-->
+
+<view class="page white-bg">
+  <view class="page__hd">
+    <view class="page__title weui-article__h1 title">{{title}}</view>
+    <view class="page__desc author">{{author}}</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-article">
+      <!-- <view class="weui-article__h1">{{article.title}}</view> -->
+      <view class="weui-article__section">
+        <!-- <view class="weui-article__title">章标题</view> -->
+        <view class="weui-article__section" wx:for="{{steps}}" wx:key="key">
+          <!-- <view class="weui-article__h3">1.1 节标题</view> -->
+          <text class="weui-article__p" wx:if="{{item.text}}">
+            {{item.text}}
+          </text>
+          <view class="weui-article__p">
+            <view wx:if="{{item.img}}" wx:key="key">
+              <image class="weui-article__img" src="{{item.img}}" mode="aspectFit" style="width:100%" />
+            </view>
+          </view>
+          <view class="weui-article__p">
+            <view wx:if="{{item.video}}" wx:key="key">
+              <video src='{{item.video}}'></video>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>

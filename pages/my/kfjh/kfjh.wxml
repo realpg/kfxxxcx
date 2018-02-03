@@ -3,7 +3,7 @@
   您还没有康复计划哦，请联系您的主治医生或康复师获取
 </view>
 
-<view wx:else class='body page'>
+<view wx:else class='body'>
 
 
   <view class='section' id="cd-timeline" class="cd-container">
@@ -19,7 +19,7 @@
 
         <view class="cd-timeline-content">
           <view class='h2'>{{item.time}}</view>
-          <view class='p'>
+          <view class='p'style="color:#333333">
              <view wx:for='{{item.title}}' wx:key="key1" wx:for-item='t'>{{t}}</view> 
             <!-- {{item.title}} -->
           </view>

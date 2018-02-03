@@ -11,11 +11,14 @@
   box-sizing: border-box;
 } 
 page {
-  height: 100%;font-size: 28rpx;
-  background: #e9efef;
+  font-size: 28rpx;
+  background: #f4f4f4;
 }
 
 .page {
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  margin-top: 20rpx;
   height: 100%;
 }
 

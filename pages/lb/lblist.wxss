@@ -1,0 +1,58 @@
+/* pages/scale/scale.wxss */
+@import '../index/index.wxss';
+
+.title {
+  font-size: 34rpx;
+  color: black;
+  margin-bottom: 10rpx;
+}
+
+.session {
+  background-color: white;
+  margin-bottom: 20rpx;
+  
+}
+
+.text {
+  color: #999;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+}
+
+.cell {
+  height: 164rpx;
+  border-bottom: 1rpx solid #ccc;
+  padding: 20rpx 20rpx;
+  margin:0 26rpx;
+}
+
+.cell_ft {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+  font-size: 24rpx;
+  width: 160rpx;
+}
+
+.cell_bd {
+  width: 450rpx;
+  font-size: 30rpx;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cz_center {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}

@@ -1,4 +1,4 @@
-<view class='page page__bd'>
+<view class='page__bd'>
   <!-- 用户信息部分 -->
 
   <view class='weui-cells' style='margin-top: 31rpx;'>
@@ -19,7 +19,7 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell" bindtap='ToKfjh'>
       <view class="weui-cell__hd">
-        <image src="../../icons/health.png" class='icon_my' style='margin-left:4rpx'></image>
+        <image src="../../icons/my_kfjh.png" class='icon_my' style='margin-left:4rpx'></image>
       </view>
       <view class="weui-cell__bd">康复计划</view> 
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
@@ -30,17 +30,27 @@
   <view class="weui-cells">
     <view class="weui-cell" bindtap='ToHistory'>
       <view class="weui-cell__hd">
-        <image src="../../icons/data.png" class='icon_my' style='width:56rpx; height: 56rpx ;margin-left:-4rpx'></image>
+        <image src="../../icons/my_cjjl.png" class='icon_my' style='width:56rpx; height: 56rpx ;margin-left:-4rpx'></image>
       </view>
       <view class="weui-cell__bd">
-        <view style="vertical-align: middle">历史数据</view>
+        <view style="vertical-align: middle">采集记录</view>
+      </view>
+       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+
+    <view class="weui-cell" bindtap='ToLBHistory'>
+      <view class="weui-cell__hd">
+        <image src="../../icons/my_lb.png" class='icon_my' style='width:56rpx; height: 56rpx ;margin-left:-4rpx'></image>
+      </view>
+      <view class="weui-cell__bd">
+        <view style="vertical-align: middle">量表记录</view>
       </view>
        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
 
     <view class="weui-cell" bindtap='medicalRecord'>
       <view class="weui-cell__hd">
-        <image src="../../icons/cases.png"class='icon_my'></image>
+        <image src="../../icons/my_bl.png"class='icon_my'></image>
       </view>
       <view class="weui-cell__bd">
         <view style="vertical-align: middle">我的病历</view>
@@ -50,7 +60,7 @@
 
     <view class="weui-cell" bindtap='ToMessage'>
       <view class="weui-cell__hd">
-        <image src="../../icons/message.png" class='icon_my' style='width:56rpx; height: 56rpx;margin-left:-4rpx'></image>
+        <image src="../../icons/my_message.png" class='icon_my' style='width:56rpx; height: 56rpx;margin-left:-4rpx'></image>
       </view>
       <view class="weui-cell__bd">
         <view style="vertical-align: middle">消息提醒</view>
@@ -62,7 +72,7 @@
   <view class="weui-cells ">
     <view class="weui-cell" bindtap='Feedback'>
       <view class="weui-cell__hd">
-        <image src="../../icons/feedback.png" class='icon_my'></image>
+        <image src="../../icons/my_feedback.png" class='icon_my'></image>
       </view>
       <view class="weui-cell__bd">反馈</view>
        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
@@ -70,43 +80,5 @@
     </view>
   </view>
 
-  <!-- <view class="weui-cells">
-    <view class="weui-cell weui-cell_access" bindtap='ToKfjh'>
-      <view class="weui-cell__bd">
-        <view style="vertical-align: middle">康复计划</view>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-
-    <view class="weui-cells__title">带图标、说明的列表项</view>
-    <view class="weui-cell weui-cell_access" bindtap='ToMessage'>
-      <view class="weui-cell__bd">
-        <view style="display: inline-block; vertical-align: middle">消息提醒</view>
-        <view wx:if="{{remind!=0}} " class="weui-badge" style="margin-left: 5px;">{{remind}}</view>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-
-    <view class="weui-cell weui-cell_access" bindtap='medicalRecord'>
-      <view class="weui-cell__bd">
-        <view style="vertical-align: middle">我的病历</view>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-
-    <view class="weui-cell weui-cell_access" bindtap='ToHistory'>
-      <view class="weui-cell__bd">
-        <view style="vertical-align: middle">历史数据</view>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-
-    <view class="weui-cell weui-cell_access" bindtap='Feedback'>
-      <view class="weui-cell__bd">
-        <view style="vertical-align: middle">反馈</view>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-
-  </view> -->
+  
 </view>

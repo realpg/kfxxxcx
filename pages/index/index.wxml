@@ -4,81 +4,76 @@
 <!-- 轮播广告图 -->
 <view class="weui-panel weui-panel_access" style='margin-top:-10rpx;'>
   <!-- <view class="weui-panel__hd">推荐内容</view> -->
-  <view class="weui-panel__bd">
-    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000" indicator-active-color="white">
-      <block wx:for="{{imgUrls}}" wx:key="key">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" style='width:750rpx;height:420rpx;' />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
+
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000" indicator-active-color="white" style='height:350rpx;width:750rpx;'>
+    <block wx:for="{{imgUrls}}" wx:key="key">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
 </view>
 
-<!-- 任务 -->
-<view class="weui-panel">
-  <view class="weui-panel__hd">今日任务</view>
-  <view class="" wx:if="{{task_today.length==0}}" style='margin:0 auto;height:300rpx;font-size:36rpx'>
-    <image class='noBorder' src='../../images/kfrw_n.jpg' style='width:750rpx;height:300rpx'></image>
-  </view>
-  <block wx:else>
-    <block wx:for="{{task_today}}" wx:key="key">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text">
-          <view class="weui-media-box__title weui-media-box__title_in-text">{{item.name}}</view>
-          <view class="weui-media-box__desc"style="overflow:scroll;-webkit-line-clamp: 4;"><text>{{item.desc}}</text></view>
-          <view class="weui-media-box__info">
-            <!-- <view class="weui-media-box__info__meta">文字来源</view>
-          <view class="weui-media-box__info__meta">时间</view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view> -->
-            <block>
-              {{item.xj_ids}}
-              <button class="weui-media-box__info__meta btn" size='mini' bindtap="getInfo" id="{{item.xj_ids}}" wx:if="{{item.xj_ids!=0}}">相关资讯</button>
-            </block>
+<view class='page'>
+  <!-- 任务 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd">
+      <image class="icon_for_session" src='../../icons/jrrw_icon.png'></image>
+      今日任务
+    </view>
+    <view class="" wx:if="{{task_today.length==0}}" style='margin:0 auto;padding:0;height:300rpx;font-size:36rpx'>
+      <image class='noBorder' src='../../images/kfrw_n.jpg' style='width:750rpx;height:300rpx'></image>
+    </view>
+    <block wx:else>
+      <view class="last_noboredr">
+          <view class="weui-panel__bd" wx:for="{{task_today}}" wx:key="key" style='border-bottom:1rpx solid #ccc;'>
+            <view class="weui-media-box weui-media-box_text">
+              <view class="weui-media-box__title weui-media-box__title_in-text box_title">{{item.name}}</view>
+              <view class="weui-media-box__desc box_desc" style="">
+                {{item.desc}}
+              </view>
+              <view class="weui-media-box__info">
+                <!-- <block  wx:if="{{item.xj_ids!=0}}">                 -->
+                <button class="box_btn" size='mini' bindtap="getInfo" id="{{item.xj_ids}}">相关资讯</button>
+                <!-- </block> -->
+              </view>
+            </view>
           </view>
-        </view>
       </view>
     </block>
-  </block>
-</view>
+  </view>
 
-<view class="weui-panel weui-panel_access">
-  <view class="weui-panel__hd">康复计划</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="" wx:if="{{kfjh.length==0}}" style='text-align:center;font-size:36rpx'>
-      <image class='noBorder' src='../../images/kfjh_n.jpg' style='width:750rpx;height:300rpx'></image>
-    </view>
-    <view class="weui-cell" wx:for="{{time_axis}}" wx:key="key">
-      <view class="weui-cell__bd" style="width:35%">{{item.time}}</view>
-      <view class="weui-cell__ft" style="width:65%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</view>
-    </view>
-    <view class="weui-cell"bindtap='getkfjh'>
-      <view class="weui-cell__bd" style='color:blue;'>点击查看康复计划</view>
-    </view>
-  </view>
-</view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">
+      <image class="icon_for_session" src='../../icons/kfjh_icon.png'></image>
+      康复计划
 
-<!-- 必读科普 -->
-<view class="weui-panel weui-panel_access">
-  <view class="weui-panel__hd">必读科普</view>
-  <view class="weui-panel__bd">
-    <navigator url="{{'/pages/textlist/article/article?id='+kp.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-      <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-        <image class="weui-media-box__thumb" src="{{kp.cover}}" />
+      <view class="title_ft" style='color:green;' bindtap='getkfjh'>查看全部</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="" wx:if="{{kfjh.length==0}}" style='text-align:center;font-size:36rpx'>
+        <image class='noBorder' src='../../images/kfjh_n.jpg' style='width:750rpx;height:300rpx'></image>
       </view>
-      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-        <view class="weui-media-box__title" style=''>{{kp.title}}</view>
-        <view class="weui-media-box__desc">{{kp.desc}}</view>
+      <view class="weui-cell cell_box" wx:for="{{time_axis}}" wx:key="key">
+        <view class="box_title" style="width:65%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;margin-top:20rpx;">{{item.name}}</view>
+        <view class="box_desc">
+          <block wx:if="{{item.startDate}}">{{item.startDate}} 至 {{item.endDate}}</block>
+          <block wx:else>{{item.setDate}}</block>
+        </view>
       </view>
-    </navigator>
-  </view>
-  <view class="weui-panel__ft">
-    <view class="weui-cell weui-cell_access weui-cell_link" bindtap='toTextList'>
-      <view class="weui-cell__bd" style='text-align:center'>查看更多</view>
-      <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
     </view>
   </view>
-</view>
-<view bindtap='cjsj' class='cjsj'>
-  采集数据
+
+  <!-- 必读科普 -->
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">
+      <image class="icon_for_session" src='../../icons/cjsj_icon.png'></image>
+      采集数据
+    </view>
+    <view class="weui-cell cell_box">
+      <view class="box_title"style="margin-top:20rpx;">采集数据</view>
+      <view class="box_desc">采集数据并上传</view>
+      <button class="box_btn" size='mini' bindtap="cjsj">采集</button>
+    </view>
+  </view>
 </view>

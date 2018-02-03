@@ -91,7 +91,7 @@ Page({
   //点击注册
   clickRegister: function (e) {
     var that = this;
-    
+
     var param = {
       account_type: "xcx",
       xcx_openid: xcx_openid,
@@ -100,12 +100,12 @@ Page({
       real_name: that.data.real_name,
       birthday: that.data.birthday
     }
-    
+
 
     util.register(param, function (ret) {
       console.log('注册ret', ret, ret.data.result)
       if (ret.data.result) {
-        util.showToast("注册成功",ret.data);
+        util.showToast("注册成功", ret.data);
         console.log(ret.data)
         app.storeUserInfo(ret.data.ret);
         app.globalData.user = ret.data.ret;
@@ -116,15 +116,15 @@ Page({
           success: function (resm) {
             if (resm.confirm) {
               var param1 = param;
-              console.log('用户点击确定',param1)
-              
+              console.log('用户点击确定', param1)
+
               //测试获取微信信息
               wx.getUserInfo({
                 success: function (res) {
                   var userInfo = res.userInfo
                   console.log(userInfo)
                   param1.nick_name = userInfo.nickName
-                  param1.avatar= userInfo.avatarUrl
+                  param1.avatar = userInfo.avatarUrl
                   param1.gender = userInfo.gender //性别 0：未知、1：男、2：女
                   param1.province = userInfo.province
                   param1.city = userInfo.city
@@ -148,12 +148,12 @@ Page({
                   })
                 }
               })
-              
-              
+
+
               wx.navigateBack({
                 delta: 1
               })
-              
+
             }
           }
         })

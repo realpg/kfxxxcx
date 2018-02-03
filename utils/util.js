@@ -1,5 +1,5 @@
 //测试标识
-var TESTMODE = true;
+var TESTMODE = false;
 //服务器地址
 var SERVER_URL = "http://kfxx.isart.me";
 var DEBUG_URL = "http://localhost/kfypt/public";
