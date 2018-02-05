@@ -35,8 +35,7 @@
         </view>
         <view class="weui-cell">
           <view class="weui-cell__bd">结果</view>
-          <view class="weui-cell__ft" wx:if="{{item.result}}">未处理</view>
-          <view class="weui-cell__ft" style="color:green"wx:elif="{{item.result==0}}">正常</view>
+          <view class="weui-cell__ft" style="color:green"wx:if="{{item.result==0}}">正常</view>
           <view class="weui-cell__ft" style="color:red"wx:elif="{{item.result==1}}">异常</view>
         </view>
       </view>
