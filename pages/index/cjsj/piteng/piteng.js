@@ -70,8 +70,10 @@ Page({
 
   },
   changeValue: function (e) {
-    console.log(e.detail)
+    
     var val = Math.round(e.detail.value * 10) / 10;
+    val=val.toFixed(1);
+    console.log(e.detail, val)
     vm.setData({
       value: val
     })

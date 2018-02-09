@@ -1,4 +1,22 @@
 <!--pages/cjsj/piwen/piwen.wxml-->
-请输入您的测量值：
-<input type='digit'value="{{value}}" bindchange='changeValue'> </input>
-<view bindtap='submit'>提交</view>
+<view class='page'>
+  <view class='session'>
+    <view>测量方式：</view>
+    <block wx:if="{{mode==0}}">
+      <view>连接设备</view>
+      <button>点我连接</button>
+      <button bindtap='switch'>切换为手动输入</button>
+    </block>
+
+    <block wx:else>
+      <view>手动输入</view>
+      <view>请输入您的测量值：</view>
+      <input type='digit' value="{{value}}" bindchange='changeValue' style='border-bottom:1rpx solid black'> </input>
+      <button bindtap='switch'>切换为连接设备</button>
+    </block>
+  </view>
+  
+  <view class='session'>
+    <button bindtap='submit'>提交</button>
+  </view>
+</view>

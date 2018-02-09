@@ -1,6 +1,6 @@
 <view class="page white-bg" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__hd">
-      <image src='../../images/logo.png'style='width:182rpx;height:182rpx;margin-top:174rpx;margin-bottom:158rpx;margin-left:284rpx'></image>
+      <image src='../../images/logo.png'style='width:182rpx;height:182rpx;margin-top:174rpx;margin-bottom:158rpx;margin-left:275rpx'></image>
   </view>
   <view class="page__bd">
     <view class="white-bg">
@@ -57,7 +57,7 @@
           <input class="weui-input grey-font" bindinput='vertifyCodeInput' placeholder="请输入验证码" />
         </view>
         <view class="weui-cell__ft" >
-        <button class="weui-vcode-btn"style='width:150rpx'catchtap='clickSendSMS'disabled="{{cd_time>0}}">{{cd_time>0?cd_time:'获取验证码'}}</button>
+        <button class="weui-vcode-btn"style='width:150rpx'catchtap='clickSendSMS'disabled="{{cd_time>0}}">{{cd_time>0?cd_time:'获取'}}</button>
         </view>
       </view>
     </view>

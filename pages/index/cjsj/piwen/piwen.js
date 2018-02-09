@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: 0
+    value: 0,
+    mode:1,
   },
 
   /**
@@ -97,4 +98,9 @@ Page({
       delta: 1,
     })
   },
+  switch:function(){
+    vm.setData({
+      mode:(1-vm.data.mode)
+    })
+  }
 })
