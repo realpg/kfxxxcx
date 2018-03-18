@@ -102,5 +102,10 @@ Page({
     vm.setData({
       mode:(1-vm.data.mode)
     })
+  },
+  bluetooth:function(){
+    wx.navigateTo({
+      url: 'bluetooth/bluetooth',
+    })
   }
 })

@@ -4,7 +4,7 @@
     <view>测量方式：</view>
     <block wx:if="{{mode==0}}">
       <view>连接设备</view>
-      <button>点我连接</button>
+      <button bindtap='bluetooth'>点我连接</button>
       <button bindtap='switch'>切换为手动输入</button>
     </block>
 

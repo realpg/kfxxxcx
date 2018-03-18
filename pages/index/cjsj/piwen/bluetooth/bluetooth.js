@@ -19,6 +19,11 @@ function chushihua() {
         })
       })
       setTimeout(function () { zhuangtai() }, 3000)
+    },
+    fail:function(){
+      vm.setData({
+        msg: "初始化蓝牙适配器失败！" + JSON.stringify(res),
+      })
     }
   })
 }
@@ -391,11 +396,12 @@ function onchange() {
     for (var x = 5; x < 21; x += 4) {
       var high = string16to10(value.slice(x, x + 2))
       var low = string16to10(value.slice(x + 2, x + 4))
-      wendu.push({
-        high: high,
-        low: low
-      })
+      wendu.push(high+'.'+low)
+      
       console.log("读取的温度为", high + '.' + low, value.slice(x, x + 4))
+      vm.setData({
+        msg:"电量:"+(battery==100?"充足":"电量低")+"     温度:"+wendu.join(",  ")
+      })
     }
     console.log("温度", wendu, value.slice(5, 21));
     vm.setData({
