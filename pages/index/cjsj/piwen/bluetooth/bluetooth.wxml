@@ -1,0 +1,7 @@
+<!--pages/index/cjsj/piwen/bluetooth/bluetooth.wxml-->
+<button bindtap='start'>点我连接</button>
+<button bindtap='reconnect'>重新连接</button>
+
+<view>{{msg}}</view>
+
+<view>成功率:{{chenggonglv}}</view>
