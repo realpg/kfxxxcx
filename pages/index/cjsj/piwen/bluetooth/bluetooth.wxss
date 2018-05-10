@@ -1,1 +1,9 @@
 /* pages/index/cjsj/piwen/bluetooth/bluetooth.wxss */
+.prm_btn{
+  color: green;
+  border: 1rpx solid green;
+  background-color: white;
+  width:80%;
+
+  margin-bottom:80rpx
+}

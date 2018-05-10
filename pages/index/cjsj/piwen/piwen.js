@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: 0,
-    mode:1,
+    value: '',
+    mode:0,
   },
 
   /**

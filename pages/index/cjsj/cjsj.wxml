@@ -71,25 +71,25 @@
         <!-- 皮温 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==1}}">
           <view class='item_content_name'>皮温</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetPiwen" size="mini" id='{{index}}n' class='item_content_btn'>测量</button>
         </view>
         <!-- 皮疼 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==2}}">
           <view class='item_content_name'>皮疼</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetPiteng" size="mini" id='{{index}}n' class='item_content_btn'>测量</button>
         </view>
         <!-- 角度 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==3}}">
           <view class='item_content_name'>角度</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetAngle" size="mini" id='{{index}}n' class='item_content_btn'>测量</button>
         </view>
         <!-- 围度 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==4}}">
           <view class='item_content_name'>围度</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetWeidu" size="mini" id='{{index}}n' class='item_content_btn'>测量</button>
         </view>
 
@@ -100,50 +100,50 @@
         <!-- 皮温 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==1}}">
           <view class='item_content_name'>左侧皮温</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetPiwen" size="mini" id='{{index}}l' class='item_content_btn'>测量</button>
         </view>
         <!-- 皮疼 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==2}}">
           <view class='item_content_name'>左侧皮疼</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetPiteng" size="mini" id='{{index}}l' class='item_content_btn'>测量</button>
         </view>
         <!-- 角度 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==3}}">
           <view class='item_content_name'>左侧角度</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetAngle" size="mini" id='{{index}}l' class='item_content_btn'>测量</button>
         </view>
         <!-- 围度 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==4}}">
           <view class='item_content_name'>左侧围度</view>
-          <view class='item_content_value'>{{item.value[0]}}</view>
+          <view class='item_content_value'>{{item.value[0]}}{{item.sjx.unit}}</view>
           <button bindtap="GetWeidu" size="mini" id='{{index}}l' class='item_content_btn'>测量</button>
         </view>
         <!-- 以上为左侧，以下为右侧 -->
         <!-- 皮温 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==1}}">
           <view class='item_content_name'>右侧皮温</view>
-          <view class='item_content_value'>{{item.value[1]}}</view>
+          <view class='item_content_value'>{{item.value[1]}}{{item.sjx.unit}}</view>
           <button bindtap="GetPiwen" size="mini" id='{{index}}r' class='item_content_btn'>测量</button>
         </view>
         <!-- 皮疼 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==2}}">
           <view class='item_content_name'>右侧皮疼</view>
-          <view class='item_content_value'>{{item.value[1]}}</view>
+          <view class='item_content_value'>{{item.value[1]}}{{item.sjx.unit}}</view>
           <button bindtap="GetPiteng" size="mini" id='{{index}}r' class='item_content_btn'>测量</button>
         </view>
         <!-- 角度 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==3}}">
           <view class='item_content_name'>右侧角度</view>
-          <view class='item_content_value'>{{item.value[1]}}</view>
+          <view class='item_content_value'>{{item.value[1]}}{{item.sjx.unit}}</view>
           <button bindtap="GetAngle" size="mini" id='{{index}}r' class='item_content_btn'>测量</button>
         </view>
         <!-- 围度 -->
         <view class='item_content weui-flex' style='flex-direction:row;justify-content:center;align-items: center;' wx:if="{{item.sjx.type==4}}">
           <view class='item_content_name'>右侧围度</view>
-          <view class='item_content_value'>{{item.value[1]}}</view>
+          <view class='item_content_value'>{{item.value[1]}}{{item.sjx.unit}}</view>
           <button bindtap="GetWeidu" size="mini" id='{{index}}r' class='item_content_btn'>测量</button>
         </view>
       </view>

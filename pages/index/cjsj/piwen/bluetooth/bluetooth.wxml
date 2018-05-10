@@ -1,7 +1,32 @@
 <!--pages/index/cjsj/piwen/bluetooth/bluetooth.wxml-->
-<button bindtap='start'>点我连接</button>
-<!-- <button bindtap='reconnect'>重新连接</button> -->
 
+<view class="weui-cells__title weui" style='color:#e64340;font-size:32rpx'>注意,连接前请确保：</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell">
+    <view class="weui-cell__hd">1.</view>
+    <view class="weui-cell__bd">手机蓝牙开关已经打开</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">2.</view>
+    <view class="weui-cell__bd">设备在手机附近</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">3.</view>
+    <view class="weui-cell__bd">设备电量充足</view>
+  </view>
+</view>
+<!-- <button bindtap='reconnect'>重新连接</button> -->
+<!-- 
 <view>{{msg}}</view>
 
-<view>成功率:{{chenggonglv}}</view>
+<view>成功率:{{chenggonglv}}</view> -->
+<view wx:if="{{results.length>0}}">
+  获取成功
+  <view wx:for="{{results}}">
+    {{item[0]}} - {{item[1]}} - {{item[2]}} - {{item[3]}}
+  </view>
+   <button class='weui-btn prm_btn' type='primary' bindtap='submit'>提交</button>
+</view>
+<view wx:else>
+  <button bindtap='start'>点我连接</button>
+</view>

@@ -1,6 +1,21 @@
 <!--pages/cjsj/piteng/piteng.wxml-->
-测量值：{{value}}
-<slider min="0" max="10" step='0.1' value='{{value}}' bindchange='changeValue'></slider>
-<image src='../../../../images/1.png'></image>
-<view bindtap='submit'>提交</view>
+<view class="weui-cells__title">皮疼测量</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell">
+    <view class="weui-cell__bd">疼度</view>
+    <view class="weui-cell__ft">
+      {{value}}
+    </view>
+  </view>
+    <slider min="0" max="10" step='0.1' value='{{value}}' bindchange='changeValue'></slider>
 
+  <view class="weui-cell">
+    <view class="weui-cell__bd">图示</view>
+    <view class="weui-cell__ft">
+      <image src='{{img}}' style='width:100rpx;height:100rpx;'></image>
+    </view>
+  </view>
+</view>
+
+
+<button class="weui-btn" type="primary" bindtap='submit'>提交</button>

@@ -20,7 +20,7 @@ function chushihua() {
       })
       setTimeout(function () { zhuangtai() }, 3000)
     },
-    fail:function(){
+    fail: function () {
       vm.setData({
         msg: "初始化蓝牙适配器失败！" + JSON.stringify(res),
       })
@@ -67,8 +67,8 @@ function sousuo() {
       })
       setTimeout(function () { jiance() }, 3000);
 
-    },fail:function(res){
-      console.log("搜索设备失败",res);
+    }, fail: function (res) {
+      console.log("搜索设备失败", res);
       setTimeout(function () { zhuangtai() }, 3000);
     }
   })
@@ -184,15 +184,15 @@ function fuwu() {
         services: res.services,
         msg: JSON.stringify(res.services),
       })
-      
+
     }
     , complete: function (res) {
       console.log('获取服务完成:', JSON.stringify(res));
-      if(res.errCode!=0 &&vm.data.services.length==0){
+      if (res.errCode != 0 && vm.data.services.length == 0) {
         error();
         fuwu();
       }
-      else{
+      else {
         setTimeout(function () { jiancefuwu() }, 1000);
       }
     }
@@ -396,19 +396,24 @@ function onchange() {
     for (var x = 5; x < 21; x += 4) {
       var high = string16to10(value.slice(x, x + 2))
       var low = string16to10(value.slice(x + 2, x + 4))
-      wendu.push(high+'.'+low)
-      
+      wendu.push(high + '.' + low)
+
       console.log("读取的温度为", high + '.' + low, value.slice(x, x + 4))
       vm.setData({
-        msg:"电量:"+(battery==100?"充足":"电量低")+"     温度:"+wendu.join(",  ")
+        msg: "电量:" + (battery == 100 ? "充足" : "电量低") + "     温度:" + wendu.join(",  ")
       })
     }
     console.log("温度", wendu, value.slice(5, 21));
+    var results = vm.data.results;
+    results.push(wendu)
     vm.setData({
-      read:true,
-      success_time:vm.data.success_time+1
+      read: true,
+      success_time: vm.data.success_time + 1,
+      results: results
     })
-    // reconnect(1);
+    wx.hideLoading();
+    if (results.length < 4)
+      reconnect(0);
   })
   //   onchange();
   // }, 3000)
@@ -420,27 +425,27 @@ function string16to10(number_code) {
 }
 function reconnect(success) {
   var try_time = parseFloat(vm.data.try_time) + 1;
-  var success_time =parseFloat(vm.data.success_time + success);
-  console.log("尝试" + try_time+"次,成功"+success_time+"次");
+  var success_time = parseFloat(vm.data.success_time + success);
+  console.log("尝试" + try_time + "次,成功" + success_time + "次");
   vm.setData({
     try_time: parseInt(try_time),
     success_time: parseInt(success_time),
     chenggonglv: success_time / try_time
   })
 
-if(!vm.data.read)
-  closeConnection(function () { 
-    wx.closeBluetoothAdapter({
-      success: function (res) {
-        console.log(res)
-        console.log("成功关闭连接，5秒后重连")
-        setTimeout(function () {
-          chushihua();
-        }, 5000)
-      }
-    })
-    
-    
+  if (!vm.data.read)
+    closeConnection(function () {
+      wx.closeBluetoothAdapter({
+        success: function (res) {
+          console.log(res)
+          console.log("成功关闭连接，5秒后重连")
+          setTimeout(function () {
+            chushihua();
+          }, 5000)
+        }
+      })
+
+
     });
 }
 
@@ -458,11 +463,11 @@ function closeConnection(callback) {
     }
   })
 }
-function error(){
+function error() {
   vm.setData({
-    errTime:vm.data.errTime+1
+    errTime: vm.data.errTime + 1
   })
-  if(vm.data.errTime>20){
+  if (vm.data.errTime > 20) {
     vm.setData({
       errTime: 0
     })
@@ -479,8 +484,9 @@ Page({
     chenggonglv: 0,
     try_time: 0,
     success_time: 0,
-    errTime:0,
-    read:false //如贵能读取到值则为true
+    errTime: 0,
+    read: false, //如贵能读取到值则为true
+    results: []
   },
 
   /**
@@ -515,7 +521,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    closeConnection(function(){
+    closeConnection(function () {
       wx.closeBluetoothAdapter({
         success: function (res) {
           console.log(res)
@@ -545,10 +551,37 @@ Page({
 
   },
   start() {
-    chushihua();
+    wx.showLoading({
+      title: '连接中',
+      mask:true,
+      success: chushihua()
+    })
   },
-  reconnect:function()
-  {
+  reconnect: function () {
     reconnect();
-  }
+  },
+  submit: function () {
+    var value=0;
+    var sum=0;
+    var n=0;
+    for(var i in vm.data.results){
+      for(var j in vm.data.results[i]){
+        sum += parseFloat(vm.data.results[i][j]);
+        n++;
+      }
+    }
+    value=sum/n;
+    value = value.toFixed(2);
+    console.log("平均值为",value)
+
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]//当前页面前一个的前一个页面
+    prevPage.setData({
+      value: value
+    })
+    console.log("数据为：", prevPage.data.value, value)
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
 })

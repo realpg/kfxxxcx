@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: 0
+    value: 0,
+    img: "../../../../images/6.png"
   },
 
   /**
@@ -70,10 +71,41 @@ Page({
 
   },
   changeValue: function (e) {
-    
+
     var val = Math.round(e.detail.value * 10) / 10;
-    val=val.toFixed(1);
+    val = val.toFixed(1);
     console.log(e.detail, val)
+    if (val >=0&&val<2) {
+      vm.setData({
+        img: "../../../../images/6.png"
+      })
+    }
+    else if (val < 4) {
+      vm.setData({
+        img: "../../../../images/5.png"
+      })
+    }
+    else if (val < 6) {
+      vm.setData({
+        img: "../../../../images/4.png"
+      })
+    }
+    else if (val < 8) {
+      vm.setData({
+        img: "../../../../images/3.png"
+      })
+    }
+    else if (val < 10) {
+      vm.setData({
+        img: "../../../../images/2.png"
+      })
+    }
+    else {
+      vm.setData({
+        img: "../../../../images/1.png"
+      })
+    }
+
     vm.setData({
       value: val
     })

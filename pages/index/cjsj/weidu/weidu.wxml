@@ -1,4 +1,13 @@
 <!--pages/cjsj/weidu/weidu.wxml-->
-请输入您的测量值：
-<input type='digit'value="{{value}}" bindchange='changeValue'> </input>
-<view bindtap='submit'>提交</view>
+<view class="weui-cells__title">围度测量</view>
+<view class="weui-cells weui-cells_after-title">
+
+
+  <view class="weui-cell">
+    <view class="weui-cell__bd">围度</view>
+    <view class="weui-cell__ft">
+      <input type='digit' value="{{value}}" bindchange='changeValue'> </input>
+    </view>
+  </view>
+</view>
+<button class="weui-btn" type="primary" bindtap='submit'>提交</button>
