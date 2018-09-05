@@ -57,28 +57,5 @@
       </view>
        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
-
-    <view class="weui-cell" bindtap='ToMessage'>
-      <view class="weui-cell__hd">
-        <image src="../../icons/my_message.png" class='icon_my' style='width:56rpx; height: 56rpx;margin-left:-4rpx'></image>
-      </view>
-      <view class="weui-cell__bd">
-        <view style="vertical-align: middle">消息提醒</view>
-      </view>
-       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-  </view>
-
-  <view class="weui-cells ">
-    <view class="weui-cell" bindtap='Feedback'>
-      <view class="weui-cell__hd">
-        <image src="../../icons/my_feedback.png" class='icon_my'></image>
-      </view>
-      <view class="weui-cell__bd">反馈</view>
-       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      <!-- <view class="weui-cell__ft">说明文字</view> -->
-    </view>
-  </view>
-
-  
+  </view>  
 </view>
